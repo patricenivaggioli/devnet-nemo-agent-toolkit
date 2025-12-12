@@ -1,0 +1,36 @@
+{
+    "title": "Demo lab - platform details",
+    "labguideVisible": true,
+    "uploadEnabled": true,
+    "additionalOptionsEnabled": true,
+    "splitPosition": 50,
+    "displayMode": "terminal",
+    "chapters": [
+        {
+            "title": "Overview",
+            "file": "000-overview",
+            "panel": "none"
+        },
+        {
+            "title": "Title 1",
+            "file": "100-chapter1",
+            "panel": "terminal"
+        },
+        {
+            "title": "Title 2",
+            "file": "200-chapter2",
+            "panel": "ide"
+        },
+        {
+            "title": "Title 3",
+            "file": "300-chapter3",
+            "panel": "terminal",
+            "externalPage": "https://%%CONTENTURL%%/lab.html"
+        },
+        {
+            "title": "Title 4",
+            "file": "",
+            "panel": "jupyter"
+        }
+    ]
+}
