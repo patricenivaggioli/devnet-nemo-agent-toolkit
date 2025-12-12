@@ -9,10 +9,15 @@ functions:
     _type: current_datetime
 
 llms:
-  nim_llm:
-    _type: nim
-    model_name: meta/llama-3.1-70b-instruct
+  azure_llm:
+    _type: openai            # tells the toolkit to build a LangChain client
+    model_name: gpt-4o  # use the Azure deployment name here
+    api_key: ${AZURE_OPENAI_API_KEY}
+    azure_endpoint: ${AZURE_OPENAI_ENDPOINT}
+    azure_deployment: ${AZURE_OPENAI_DEPLOYMENT_NAME}
+    openai_api_version: 2024-05-01-preview
     temperature: 0.0
+    max_retries: 6
 
 embedders:
   nv-embedqa-e5-v5:
@@ -25,3 +30,4 @@ workflow:
   llm_name: nim_llm
   verbose: true
   parse_agent_response_max_retries: 3
+
