@@ -153,7 +153,7 @@ llms:
     azure_endpoint: ${AZURE_OPENAI_ENDPOINT}
     azure_deployment: ${AZURE_OPENAI_DEPLOYMENT}
     api_key: ${AZURE_OPENAI_API_KEY}
-    api_version: ${AZURE_OPENAI_API_VERSION}$
+    api_version: ${AZURE_OPENAI_API_VERSION}
 
 workflow:
   _type: react_agent
@@ -162,6 +162,12 @@ workflow:
     - current_datetime
     - getting_started
 EOF
+```
+
+And we need also to fix the `agent.py` script from the NAT library:
+
+```bash
+cp ~/work/agent.py .venv/lib/python3.13/site-packages/nat/agent/react_agent/agent.py
 ```
 
 ## Interpreting Workflow Functions
