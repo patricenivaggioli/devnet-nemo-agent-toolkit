@@ -42,7 +42,7 @@ tree getting_started/
 
 You should have a similar output:
 
-```bash
+```console
 (nemo-agent-toolkit-clone) outshift> tree getting_started/
 getting_started/
 ├── configs -> /home/ubuntu/work/nemo-agent-toolkit-clone/getting_started/src/getting_started/configs
