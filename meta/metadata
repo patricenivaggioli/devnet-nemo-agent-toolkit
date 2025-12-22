@@ -9,7 +9,7 @@
         {
             "title": "Overview",
             "file": "000-overview",
-            "panel": "none"
+            "panel": "terminal"
         },
         {
             "title": "Title 1",
@@ -19,18 +19,12 @@
         {
             "title": "Title 2",
             "file": "200-chapter2",
-            "panel": "ide"
+            "panel": "terminal"
         },
         {
             "title": "Title 3",
             "file": "300-chapter3",
             "panel": "terminal",
-            "externalPage": "https://%%CONTENTURL%%/lab.html"
-        },
-        {
-            "title": "Title 4",
-            "file": "",
-            "panel": "jupyter"
         }
     ]
 }
