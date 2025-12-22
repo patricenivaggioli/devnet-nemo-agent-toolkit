@@ -123,21 +123,15 @@ class ReActAgentGraph(DualNodeAgent):
         # models that don't need (or don't support)a stop sequence
         smart_models = re.compile(r"gpt-?5", re.IGNORECASE)
         for model_attr in ("model", "model_name"):
-            try:
-                attr_value = getattr(self.llm, model_attr, None)
-            except Exception:
-                attr_value = None
+            attr_value = getattr(self.llm, model_attr, None)
             if attr_value is None:
                 continue
             if isinstance(attr_value, bytes):
                 attr_value = attr_value.decode("utf-8", errors="ignore")
             elif not isinstance(attr_value, str):
                 attr_value = str(attr_value)
-            try:
-                if smart_models.search(attr_value):
-                    return self.llm
-            except TypeError:
-                continue
+            if smart_models.search(attr_value):
+                return self.llm
         return self.llm.bind(stop=["Observation:"])
 
     def _get_tool(self, tool_name: str):
