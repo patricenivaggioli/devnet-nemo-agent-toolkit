@@ -1,0 +1,49 @@
+llms:
+  azure_llm:
+    _type: azure_openai
+    azure_endpoint: ${AZURE_OPENAI_ENDPOINT}
+    azure_deployment: ${AZURE_OPENAI_DEPLOYMENT}
+    api_key: ${AZURE_OPENAI_API_KEY}
+    api_version: 2024-05-01-preview
+    temperature: 0.0
+
+embedders:
+  azure_embedder:
+    _type: azure_openai
+    azure_endpoint: ${AZURE_OPENAI_ENDPOINT}
+    azure_deployment: text-embedding-3-large
+    api_key: ${AZURE_OPENAI_API_KEY}
+    api_version: 2024-05-01-preview
+    truncate: END
+
+functions:
+  total_product_sales_data:
+    _type: get_total_product_sales_data
+    data_path: data/retail_sales_data.csv
+  sales_per_day:
+    _type: get_sales_per_day
+    data_path: data/retail_sales_data.csv
+  detect_outliers:
+    _type: detect_outliers_iqr
+    data_path: data/retail_sales_data.csv
+
+  product_catalog_rag:
+    _type: llama_index_rag
+    llm_name: azure_llm
+    embedder_name: azure_embedder
+    collection_name: product_catalog_rag
+    data_dir: data/rag/
+    description: "Search product catalog for TabZen tablet, AeroBook laptop, NovaPhone specifications"
+
+workflow:
+  _type: react_agent
+  tool_names:
+    - total_product_sales_data
+    - sales_per_day
+    - detect_outliers
+    - product_catalog_rag
+  llm_name: azure_llm
+  max_history: 10
+  max_iterations: 15
+  description: "A helpful assistant that can answer questions about the retail sales CSV data"
+  verbose: true

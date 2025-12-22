@@ -1,0 +1,19 @@
+functions:
+  current_datetime:
+    _type: current_datetime
+  getting_started:
+    _type: getting_started
+    prefix: 'Hello:'
+llms:
+  azure_llm:
+    _type: azure_openai
+    azure_endpoint: ${AZURE_OPENAI_ENDPOINT}
+    azure_deployment: ${AZURE_OPENAI_DEPLOYMENT}
+    api_key: ${AZURE_OPENAI_API_KEY}
+    api_version: 2024-05-01-preview
+workflow:
+  _type: react_agent
+  llm_name: azure_llm
+  tool_names:
+  - current_datetime
+  - getting_started
