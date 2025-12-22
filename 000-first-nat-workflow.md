@@ -1,4 +1,4 @@
-# Getting Started with NeMo Agent Toolkit
+# First NAT Workflow
 
 In this first lab, we walk through the basics of using NVIDIA NeMo Agent toolkit (NAT), from installation all the way to creating and running a simple workflow. The intention of this lab is to get new NAT users up and running with a high level understanding of our YAML-first approach, while gaining some intuition towards how NAT workflows can quickly be embedded into your projects.
 

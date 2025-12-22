@@ -7,23 +7,23 @@
     "displayMode": "terminal",
     "chapters": [
         {
-            "title": "Overview",
-            "file": "000-overview",
+            "title": "First NAT workflow",
+            "file": "000-first-nat-workflow",
             "panel": "terminal"
         },
         {
-            "title": "Title 1",
-            "file": "100-chapter1",
+            "title": "Adding Tools To Agents",
+            "file": "100-adding-tools-to-agents",
             "panel": "terminal"
         },
         {
-            "title": "Title 2",
-            "file": "200-chapter2",
+            "title": "Multi Agent Orchestration",
+            "file": "200-multi-agent-orchestration",
             "panel": "terminal"
         },
         {
-            "title": "Title 3",
-            "file": "300-chapter3",
+            "title": "Observability, Evaluation and Profiling",
+            "file": "300-observability-evaluation-profiling",
             "panel": "terminal",
         }
     ]
