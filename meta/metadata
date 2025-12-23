@@ -17,6 +17,11 @@
             "panel": "terminal"
         },
         {
+            "title": "Adding Retrieval Tool",
+            "file": "110-adding-retrieval-tool",
+            "panel": "terminal"
+        },
+        {
             "title": "Multi Agent Orchestration",
             "file": "200-multi-agent-orchestration",
             "panel": "terminal"
@@ -24,7 +29,7 @@
         {
             "title": "Observability, Evaluation and Profiling",
             "file": "300-observability-evaluation-profiling",
-            "panel": "terminal",
+            "panel": "terminal"
         }
     ]
 }
