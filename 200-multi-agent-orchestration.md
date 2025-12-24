@@ -329,5 +329,5 @@ nat run --config_file retail_sales_agent/configs/config_multi_agent.yml \
 ### Display the plot result
 
 <br>
-![Average Daily Revenue](average_daily_revenue.png)
+![Average Daily Revenue](/home/ubuntu/work/nemo-agent-toolkit-clone/average_daily_revenue.png)
 <br>
