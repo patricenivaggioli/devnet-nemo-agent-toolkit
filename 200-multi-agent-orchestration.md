@@ -330,5 +330,4 @@ nat run --config_file retail_sales_agent/configs/config_multi_agent.yml \
 
 <br>
 ![Average Daily Revenue](average_daily_revenue.png)
-average_daily_revenue
 <br>
