@@ -164,19 +164,19 @@ Next, we introduce a new workflow configuration file. Upon first glance, this co
 In this multi-agent orchestration system, we divide responsibilities among specialized agents, each equipped with tools that match their domain expertise:
 
 **1. Data Analysis Agent**
-- **Tools:** `total_product_sales_data`, `sales_per_day`, `detect_outliers`. 
+- **Tools:** `total_product_sales_data`, `sales_per_day`, `detect_outliers`.  
 - **Justification:** This agent handles raw data processing and statistical analysis. These tools extract, aggregate, and analyze sales data, making it the expert for answering questions about sales trends, patterns, and anomalies. By isolating data analysis tasks, we ensure consistent and reliable data interpretation.
 
 **2. Visualization Agent**
-- **Tools:** `plot_total_product_sales`, `plot_sales_per_day`, `plot_average_daily_revenue`. 
+- **Tools:** `plot_total_product_sales`, `plot_sales_per_day`, `plot_average_daily_revenue`.  
 - **Justification:** This agent specializes in creating visual representations of data. Visualization requires different expertise than raw data analysis—it involves understanding chart types, formatting, and visual communication. Separating this from data analysis allows the agent to focus on producing clear, effective visualizations without mixing concerns.
 
 **3. Knowledge Retrieval Agent (RAG)**
-- **Tools:** `llama_index_rag_tool`. 
+- **Tools:** `llama_index_rag_tool`.  
 - **Justification:** This agent accesses external knowledge bases and documentation through retrieval-augmented generation. It handles questions that require contextual information beyond the sales data itself, such as business policies, product information, or historical context. This separation ensures that knowledge retrieval doesn't interfere with computational tasks.
 
 **4. Orchestrator Agent (Top-Level)**
-- **Tools:** None (delegates to sub-agents). 
+- **Tools:** None (delegates to sub-agents).  
 - **Justification:** The orchestrator doesn't perform tasks directly but instead routes requests to the appropriate expert agent. This design pattern mirrors real-world organizational structures where a manager delegates to specialists. It enables complex workflows where multiple agents collaborate, each contributing their expertise to solve multi-faceted problems.  
 
 This architecture provides several benefits:
