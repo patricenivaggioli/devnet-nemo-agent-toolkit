@@ -185,7 +185,7 @@ This architecture provides several benefits:
 - **Scalability:** New agents and tools can be added without disrupting existing ones
 - **Efficiency:** Agents only load and reason about tools relevant to their domain
 
-> **Note:** _You will notice in the below configuration that no tools are directly called by the workflow-level agent. Instead, it delegates specifically to expert agents based on the request_
+**Note:** _You will notice in the below configuration that no tools are directly called by the workflow-level agent. Instead, it delegates specifically to expert agents based on the request_
 
 ```bash
 cd ~/work/nemo-agent-toolkit-clone/
@@ -328,4 +328,7 @@ nat run --config_file retail_sales_agent/configs/config_multi_agent.yml \
 
 ### Display the plot result
 
-
+<br>
+![Average Daily Revenue](average_daily_revenue.png)
+average_daily_revenue
+<br>
