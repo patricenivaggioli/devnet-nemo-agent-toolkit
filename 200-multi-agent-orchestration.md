@@ -149,7 +149,7 @@ EOF
 
 ```bash
 cd ~/work/nemo-agent-toolkit-clone/
-cat >> retail_sales_agent/src/retail_sales_agent/register.py <'EOF'
+cat >> retail_sales_agent/src/retail_sales_agent/register.py <<'EOF'
 
 from . import data_visualization_tools
 EOF
