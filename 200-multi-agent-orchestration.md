@@ -8,6 +8,9 @@ By the conclusion of this example, we will create a simple mixture-of-agents tha
 
 **Note:** _This is just an example agent system that uses dummy data. The intention is to demonstrate some of the capabilities of this toolkit and how a new user can get familiar with it._
 
+> [!NOTE]
+> Useful information that users should know, even when skimming content.
+
 This agent system has:
 
 1. A **supervisor** agent that routes incoming requests to the downstream agent expert
