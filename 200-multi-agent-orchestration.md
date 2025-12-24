@@ -4,7 +4,7 @@ In this lab, we showcase how the NVIDIA NeMo Agent Toolkit (NAT) can be used to 
 
 By the conclusion of this example, we will create a simple mixture-of-agents that serves as an assistant in retail sales.
 
-> **Note:** _This is just an example agent system that uses dummy data. The intention is to demonstrate some of the capabilities of this toolkit and how a new user can get familiar with it._
+**Note:** _This is just an example agent system that uses dummy data. The intention is to demonstrate some of the capabilities of this toolkit and how a new user can get familiar with it._
 
 This agent system has:
 
