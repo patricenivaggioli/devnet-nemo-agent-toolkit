@@ -145,6 +145,14 @@ async def plot_average_daily_revenue_function(config: PlotAverageDailyRevenueCon
 EOF
 ```
 
+### Install matplotlib
+
+As `data_visualization_tools.py` uses `matplotlib` library, let's intall it:
+
+```bash
+uv pip install matplotlib
+```
+
 ### Register the tools
 
 ```bash
