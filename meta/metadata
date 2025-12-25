@@ -26,6 +26,11 @@
             "file": "200-multi-agent-orchestration",
             "panel": "terminal"
         },
+                {
+            "title": "Human In The Loop",
+            "file": "210-human-in-the-loop",
+            "panel": "terminal"
+        },
         {
             "title": "Observability, Evaluation and Profiling",
             "file": "300-observability-evaluation-profiling",
