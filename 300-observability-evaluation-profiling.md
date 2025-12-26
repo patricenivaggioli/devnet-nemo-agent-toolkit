@@ -457,21 +457,21 @@ Image("profile_output/gantt_chart.png")
 In this notebook, we covered the complete workflow for observability, evaluation, and profiling in NeMo Agent Toolkit:
 
 **Observability with Phoenix**
-- Configured tracing in the workflow configuration
-- Started the Phoenix server for real-time monitoring
-- Executed workflows with automatic trace capture
-- Visualized agent execution flow and LLM interactions
+- Configured tracing in the workflow configuration.  
+- Started the Phoenix server for real-time monitoring.  
+- Executed workflows with automatic trace capture.  
+- Visualized agent execution flow and LLM interactions.  
 
 **Evaluation with `nat eval`**
-- Created a comprehensive evaluation dataset
-- Ran automated evaluations across multiple test cases
-- Reviewed evaluation metrics and scores
-- Analyzed workflow performance against expected outputs
+- Created a comprehensive evaluation dataset.  
+- Ran automated evaluations across multiple test cases.  
+- Reviewed evaluation metrics and scores.  
+- Analyzed workflow performance against expected outputs.  
 
 **Profiling for Performance Optimization**
-- Configured advanced profiling options
-- Collected performance metrics and usage statistics
-- Generated detailed profiling reports
-- Identified bottlenecks and optimization opportunities
+- Configured advanced profiling options.  
+- Collected performance metrics and usage statistics.  
+- Generated detailed profiling reports.  
+- Identified bottlenecks and optimization opportunities.  
 
-These three pillars—observability, evaluation, and profiling—work together to provide a complete picture of your agent's behavior, accuracy, and performance, enabling you to build production-ready AI applications with confidence.
+These three pillars—observability, evaluation, and profiling—work together to provide a complete picture of your agent's behavior, accuracy, and performance, enabling you to build production-ready AI applications with confidence.   
