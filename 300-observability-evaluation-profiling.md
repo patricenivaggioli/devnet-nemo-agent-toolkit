@@ -326,3 +326,152 @@ Each evaluator provides:
 
 All evaluation results are stored in the `output_dir` specified in the configuration file.
 
+## Profiling a Workflow
+
+Profiling provides deep insights into your workflow's performance characteristics, helping you identify bottlenecks, optimize resource usage, and improve overall efficiency.
+
+For detailed information on profiling, please refer to the [Profiling and Performance Monitoring of NVIDIA NeMo Agent Toolkit Workflows](https://docs.nvidia.com/nemo/agent-toolkit/latest/workflows/profiler.html).
+
+### Updating the Workflow Configuration
+
+Workflow configuration files can contain extra settings relevant for evaluation and profiling.
+
+To do this, we will first copy the original configuration:
+
+```bash
+cd ~/work/nemo-agent-toolkit-clone/
+cp retail_sales_agent/configs/config_multi_agent.yml retail_sales_agent/configs/config_profile.yml
+```
+
+*Then* we will append necessary configuration components to the `config_profile.yml` file:
+
+```bash
+cd ~/work/nemo-agent-toolkit-clone/
+cat >> retail_sales_agent/configs/config_profile.yml <<'EOF'
+
+eval:
+  general:
+    output_dir: ./profile_output
+    verbose: true
+    dataset:
+        _type: json
+        file_path: ./retail_sales_agent/data/eval_data.json
+
+    profiler:
+        token_uniqueness_forecast: true
+        workflow_runtime_forecast: true
+        compute_llm_metrics: true
+        csv_exclude_io_text: true
+        prompt_caching_prefixes:
+          enable: true
+          min_frequency: 0.1
+        bottleneck_analysis:
+          enable_nested_stack: true
+        concurrency_spike_analysis:
+          enable: true
+          spike_threshold: 7
+EOF
+```
+
+### Understanding the Profiler Configuration
+
+We will reuse the same configuration as evaluation.
+
+The profiler is configured through the `profiler` section of your workflow configuration file. It runs alongside the `nat eval` command and offers several analysis options:
+
+#### Key Configuration Options:
+
+- **`token_uniqueness_forecast`**: Computes the inter-query token uniqueness forecast, predicting the expected number of unique tokens in the next query based on tokens used in previous queries
+
+- **`workflow_runtime_forecast`**: Calculates the expected workflow runtime based on historical query performance
+
+- **`compute_llm_metrics`**: Computes inference optimization metrics including latency, throughput, and other performance indicators
+
+- **`csv_exclude_io_text`**: Prevents large text from being dumped into output CSV files, preserving CSV structure and readability
+
+- **`prompt_caching_prefixes`**: Identifies common prompt prefixes that can be pre-populated in KV caches for improved performance
+
+- **`bottleneck_analysis`**: Analyzes workflow performance measures such as bottlenecks, latency, and concurrency spikes
+  - `simple_stack`: Provides a high-level analysis
+  - `nested_stack`: Offers detailed analysis of nested bottlenecks (e.g., tool calls inside other tool calls)
+
+- **`concurrency_spike_analysis`**: Identifies concurrency spikes in your workflow. The `spike_threshold` parameter (e.g., 7) determines when to flag spikes based on the number of concurrent running functions
+
+#### Output Directory
+
+The `output_dir` parameter specifies where all profiler outputs will be stored for later analysis.
+
+### Running the Profiler
+
+The profiler runs as part of the `nat eval` command. When properly configured, it will collect performance data across all evaluation runs and generate comprehensive profiling reports.
+
+```bash
+cd ~/work/nemo-agent-toolkit-clone/
+nat eval --config_file retail_sales_agent/configs/config_profile.yml
+```
+
+### Understanding Profiler Output Files
+
+Based on the profiler configuration, the following files will be generated in the `output_dir`:
+
+**Core Output Files:**
+
+1. **`all_requests_profiler_traces.json`**: Raw usage statistics collected by the profiler, including:
+   - Raw traces of LLM interactions
+   - Tool input and output data
+   - Runtime measurements
+   - Execution metadata
+
+2. **`inference_optimization.json`**: Workflow-specific performance metrics with confidence intervals:
+   - 90%, 95%, and 99% confidence intervals for latency
+   - Throughput statistics
+   - Workflow runtime predictions
+
+3. **`standardized_data_all.csv`**: Standardized usage data in CSV format containing:
+   - Prompt tokens and completion tokens
+   - LLM input/output
+   - Framework information
+   - Additional metadata
+
+**Advanced Analysis Files**
+
+4. **Analysis Reports**: JSON files and text reports for any advanced techniques enabled:
+   - Concurrency analysis results
+   - Bottleneck analysis reports
+   - PrefixSpan pattern mining results
+
+These files provide comprehensive insights into your workflow's performance and can be used for optimization and debugging.
+
+**Gantt Chart**
+
+We can also view a Gantt chart of the profile run:
+
+```bash
+from IPython.display import Image
+
+Image("profile_output/gantt_chart.png")
+```
+
+## Notebook Summary
+
+In this notebook, we covered the complete workflow for observability, evaluation, and profiling in NeMo Agent Toolkit:
+
+**Observability with Phoenix**
+- Configured tracing in the workflow configuration
+- Started the Phoenix server for real-time monitoring
+- Executed workflows with automatic trace capture
+- Visualized agent execution flow and LLM interactions
+
+**Evaluation with `nat eval`**
+- Created a comprehensive evaluation dataset
+- Ran automated evaluations across multiple test cases
+- Reviewed evaluation metrics and scores
+- Analyzed workflow performance against expected outputs
+
+**Profiling for Performance Optimization**
+- Configured advanced profiling options
+- Collected performance metrics and usage statistics
+- Generated detailed profiling reports
+- Identified bottlenecks and optimization opportunities
+
+These three pillars—observability, evaluation, and profiling—work together to provide a complete picture of your agent's behavior, accuracy, and performance, enabling you to build production-ready AI applications with confidence.
