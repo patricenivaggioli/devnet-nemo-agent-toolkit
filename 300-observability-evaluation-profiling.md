@@ -193,6 +193,12 @@ general:
 EOF
 ```
 
+### Install Phoenix telemetry plugin
+
+```bash
+uv pip install "nvidia-nat[phoenix]"
+```
+
 ### Start Phoenix Server
 
 ```bash
@@ -280,18 +286,18 @@ eval:
     accuracy:
       _type: ragas
       metric: AnswerAccuracy
-      llm_name: nim_llm
+      llm_name: azure_llm
     groundedness:
       _type: ragas
       metric: ResponseGroundedness
-      llm_name: nim_llm
+      llm_name: azure_llm
     relevance:
       _type: ragas
       metric: ContextRelevance
-      llm_name: nim_llm
+      llm_name: azure_llm
     trajectory_accuracy:
       _type: trajectory
-      llm_name: nim_llm
+      llm_name: azure_llm
 EOF
 ```
 
