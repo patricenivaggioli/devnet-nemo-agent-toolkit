@@ -452,7 +452,7 @@ from IPython.display import Image
 Image("profile_output/gantt_chart.png")
 ```
 
-## Notebook Summary
+## Lab Summary
 
 In this notebook, we covered the complete workflow for observability, evaluation, and profiling in NeMo Agent Toolkit:
 
