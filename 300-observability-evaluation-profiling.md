@@ -312,16 +312,17 @@ nat eval --config_file retail_sales_agent/configs/config_eval.yml
 
 ### Understanding Evaluation Results
 
-The `nat eval` command runs the workflow on all entries in the dataset and produces several output files:
+The `nat eval` command runs the workflow on all entries in the dataset and produces several output files:   
 
-- **`workflow_output.json`**: Contains the raw outputs from the workflow for each input in the dataset
-- **Evaluator-specific files**: Each configured evaluator generates its own output file with scores and reasoning
+- **`workflow_output.json`**: Contains the raw outputs from the workflow for each input in the dataset.  
+- **Evaluator-specific files**: Each configured evaluator generates its own output file with scores and reasoning.  
 
 #### Evaluation Scores
 
-Each evaluator provides:
-- An **average score** across all dataset entries (0-1 scale, where 1 is perfect)
-- **Individual scores** for each entry with detailed reasoning
-- **Performance metrics** to help identify areas for improvement
+Each evaluator provides:   
+- An **average score** across all dataset entries (0-1 scale, where 1 is perfect).  
+- **Individual scores** for each entry with detailed reasoning.  
+- **Performance metrics** to help identify areas for improvement.  
 
 All evaluation results are stored in the `output_dir` specified in the configuration file.
+
