@@ -1,8 +1,8 @@
-# First NAT Workflow
+# 1. First NAT Workflow
 
 In this first lab, we walk through the basics of using NVIDIA NeMo Agent toolkit (NAT), from installation all the way to creating and running a simple workflow. The intention of this lab is to get new NAT users up and running with a high level understanding of our YAML-first approach, while gaining some intuition towards how NAT workflows can quickly be embedded into your projects.
 
-## Install NeMo Agent Toolkit
+## 1.1 Install NeMo Agent Toolkit
 
 ```bash
 cd ~/nemo-agent-toolkit/
@@ -20,7 +20,7 @@ source .venv/bin/activate
 
 It is also possible to install sub packages with pip: `uv pip install "nvidia-nat[langchain]"`
 
-## Creating Your First Workflow
+## 1.2 Creating Your First Workflow
 
 A [workflow](https://docs.nvidia.com/nemo/agent-toolkit/latest/workflows/about/index.html) in NeMo Agent Toolkit is a structured specification of how agents, models, tools (called functions), embedders, and other components are composed together to carry out a specific task. It defines which components are used, how they are connected, and how they behave when executing the task.
 
@@ -32,7 +32,7 @@ The `nat workflow create` command allows us to create a new workflow.
 nat workflow create getting_started
 ```
 
-## Interpret your first workflow
+## 1.3 Interpret your first workflow
 
 We can inspect the structure of the created **workflow directory**, which we've named `getting_started`, and contains the configuration files, source code, and data needed to define and run the workflow.
 
@@ -78,7 +78,7 @@ A summary of the high-level components are outlined below.
     * `getting_started.py` User-defined code for workflow execution
     * `register.py` Automatic registration of project components
 
-###  Interpreting Configuration File
+###  1.3.1 Interpreting Configuration File
 
 The workflow configuration file, `getting_started/configs/config.yml`, describes the operational characteristics of the entire workflow. Let's load its contents in the next cell and understand what this first workflow can do out of the box.
 
@@ -108,7 +108,7 @@ workflow:
   tool_names: [current_datetime, getting_started]
 ```
 
-The above workflow configuration has the following components:
+The above workflow configuration has the following components:   
 - a [built-in `current_datetime`](https://docs.nvidia.com/nemo/agent-toolkit/latest/api/nat/tool/datetime_tools/index.html#nat.tool.datetime_tools.current_datetime) function.  
 - a workflow-defined `getting_started` function.  
 - an LLM.  
@@ -128,11 +128,11 @@ This workflow configuration file is a YAML-serialized version of the [`Config`](
 * `eval` - The evaluation section provides configuration options related to the profiling and evaluation of NAT workflows.   
 * `tcc_strategies` (experimental) - Test Time Compute (TTC) strategy definitions.   
 
-### Type Safety and Validation
+### 1.3.2 Type Safety and Validation
 
 Many components within the workflow configuration specify `_type`. This YAML key is used to indicate the type of the component so NAT can properly validate and instantiate a component within the workflow. For example, [`NIMModelConfig`](https://docs.nvidia.com/nemo/agent-toolkit/latest/api/nat/llm/nim_llm/index.html#nat.llm.nim_llm.NIMModelConfig) is a subclass of [`LLMBaseConfig`](https://docs.nvidia.com/nemo/agent-toolkit/latest/api/nat/data_models/llm/index.html#nat.data_models.llm.LLMBaseConfig) so when we specify: `_type: nim` in the configuration the toolkit knows to validate the configuration with `NIMModelConfig`.
 
-### Let's adjust the llm provider
+### 1.3.3 Let's adjust the llm provider
 
 For that lab session, we don't use NVIDIA NGC service but Azure AI, so we need to modify the `llms:` section in the `config.yml` file.
 
@@ -164,11 +164,11 @@ EOF
 
 And we need also to fix the `agent.py` script from the NAT library:
 
-```bash
+```console
 cp ~/work/agent.py .venv/lib/python3.13/site-packages/nat/agent/react_agent/agent.py
 ```
 
-## Interpreting Workflow Functions
+## 1.4 Interpreting Workflow Functions
 
 Next, let's inspect the contents of the generated workflow function:
 
@@ -179,7 +179,6 @@ cat getting_started/src/getting_started/getting_started.py ; echo
 You should have the following output:
 
 ```python
-getting_started.py ; echo
 import logging
 
 from pydantic import Field
@@ -232,11 +231,11 @@ async def getting_started_function(config: GettingStartedFunctionConfig, builder
     yield FunctionInfo.from_fn(_echo, description=_echo.__doc__)`
 ```
 
-### Function Configuration
+### 1.4.1 Function Configuration
 
 The `GettingStartedFunctionConfig` specifies `FunctionBaseConfig` as a base class. There is also a `name` specified. This name is used by the toolkit to create a static mapping when `_type` is specified anywhere where a `FunctionBaseConfig` is expected, such as `workflow` or under `functions`.
 
-### Function Registration
+### 1.4.2 Function Registration
 
 NeMo Agent toolkit relies on a configuration with builder pattern to define most components. For functions, `@register_function` is a decorator that must be specified to inform the toolkit that a function should be accessible automatically by name when referenced. The decorator requires that a `config_type` is specified. This is done to ensure type safety and validation.
 
@@ -245,7 +244,7 @@ The parameters to the decorated function are always:
 1. the configuration type of the function component (FunctionBaseConfig).  
 2. a Builder which can be used to dynamically query and get other workflow components (Builder).  
 
-### Function Implementation
+### 1.4.3 Function Implementation
 
 The core logic of the `getting_started` function is embedded as a function within the outer function registration. This is done for a few reasons:   
 
@@ -257,7 +256,7 @@ Near the end of the function registration implementation, we `yield` a `Function
 
 NAT relies on `yield` rather `return` so resources can stay alive during the lifetime of the function or workflow.
 
-### Tying It Together
+### 1.4.3 Tying It Together
 
 Looking back at the configuration file, the `workflow`'s `_type` is `getting_started`. This means that the configuration of `workflow` will be validated based on the `GettingStartedFunctionConfig` implementation.
 
@@ -267,13 +266,37 @@ The `register.py` file tells NAT what should automatically be imported so it is 
 cat getting_started/src/getting_started/register.py ; echo
 ```
 
-## Running Your First Workflow
+## 1.5 Running Your First Workflow
 
-### Run with the CLI
+### 1.5.1 Run with the CLI
 
 You can run a workflow by using `nat run` CLI command:
 
 ```bash
 nat run --config_file getting_started/configs/config.yml \
          --input "Can you echo back my name, Will?"
+```
+
+You should have the following output:
+
+```console
+2026-01-04 17:29:23 - INFO     - nat.cli.commands.start:192 - Starting NAT from config file: 'getting_started/configs/config.yml'
+
+Configuration Summary:
+--------------------
+Workflow Type: react_agent
+Number of Functions: 2
+Number of Function Groups: 0
+Number of LLMs: 1
+Number of Embedders: 0
+Number of Memory: 0
+Number of Object Stores: 0
+Number of Retrievers: 0
+Number of TTC Strategies: 0
+Number of Authentication Providers: 0
+
+2026-01-04 17:29:28 - INFO     - nat.front_ends.console.console_front_end_plugin:102 - --------------------------------------------------
+Workflow Result:
+['Hello, Will! How can I assist you today?']
+--------------------------------------------------
 ```
