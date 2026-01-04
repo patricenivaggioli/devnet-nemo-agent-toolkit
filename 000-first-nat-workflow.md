@@ -5,20 +5,20 @@ In this first lab, we walk through the basics of using NVIDIA NeMo Agent toolkit
 ## Install NeMo Agent Toolkit
 
 ```bash
-cd ~/work/nemo-agent-toolkit-clone/
+cd ~/nemo-agent-toolkit/
 ```
 
 ```bash
-uv venv
+export SETUPTOOLS_SCM_PRETEND_VERSION="0.0.0"
+export SETUPTOOLS_SCM_PRETEND_VERSION_FOR_NVIDIA_NAT="0.0.0"
+uv sync
 ```
 
 ```bash
 source .venv/bin/activate
 ```
 
-```bash
-uv pip install "nvidia-nat[langchain]"
-```
+It is also possible to install sub packages with pip: `uv pip install "nvidia-nat[langchain]"`
 
 ## Creating Your First Workflow
 
