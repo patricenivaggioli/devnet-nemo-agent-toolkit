@@ -418,7 +418,7 @@ Next we will show you how to add new tools to the agent.
 This tool gets total sales for a specific product from `data/product_catalog.md`
 
 ```bash
-cd ~/work/nemo-agent-toolkit-clone/
+cd ~/nemo-agent-toolkit/
 cat > retail_sales_agent/src/retail_sales_agent/total_product_sales_data_tool.py <<'EOF'
 from pydantic import Field
 
@@ -468,7 +468,7 @@ EOF
 This tool gets the total sales across all products per day from `data/product_catalog.md`
 
 ```bash
-cd ~/work/nemo-agent-toolkit-clone/
+cd ~/nemo-agent-toolkit/
 cat > retail_sales_agent/src/retail_sales_agent/sales_per_day_tool.py <<'EOF'
 from pydantic import Field
 
@@ -521,7 +521,7 @@ EOF
 This tool detects outliers in `data/product_catalog.md` data using IQR (Interquartile Range) method.
 
 ```bash
-cd ~/work/nemo-agent-toolkit-clone/
+cd ~/nemo-agent-toolkit/
 cat > retail_sales_agent/src/retail_sales_agent/detect_outliers_tool.py <<'EOF'
 from pydantic import Field
 
@@ -577,7 +577,7 @@ EOF
 We need to update the `register.py` file to register these tools with NeMo Agent toolkit.
 
 ```bash
-cd ~/work/nemo-agent-toolkit-clone/
+cd ~/nemo-agent-toolkit/
 cat > retail_sales_agent/src/retail_sales_agent/register.py <<'EOF'
 
 from . import sales_per_day_tool
@@ -593,7 +593,7 @@ Below we show how to update the default configuration file for this new tool-cal
 Take a moment to analyze the new `retail_sales_agent/configs/config.yml` file below, where a `functions` header has been defined and each registered tool from the previous section is listed. 
 
 ```bash
-cd ~/work/nemo-agent-toolkit-clone/
+cd ~/nemo-agent-toolkit/
 cat > retail_sales_agent/configs/config.yml <<'EOF'
 llms:
   azure_llm:
