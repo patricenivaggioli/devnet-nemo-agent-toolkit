@@ -26,7 +26,7 @@ This is a new set of tools that will be registered to the data analysis and plot
 ### Define Analysis/Plotting Tools
 
 ```bash
-cd ~nemo-agent-toolkit/
+cd ~/nemo-agent-toolkit/
 cat > retail_sales_agent/src/retail_sales_agent/data_visualization_tools.py <<'EOF'
 from pydantic import Field
 
