@@ -90,7 +90,6 @@ cat getting_started/configs/config.yml; echo
 You should have the following output:
 
 ```yaml
-(nemo-agent-toolkit-clone) outshift> cat getting_started/configs/config.yml; echo
 functions:
   current_datetime:
     _type: current_datetime
