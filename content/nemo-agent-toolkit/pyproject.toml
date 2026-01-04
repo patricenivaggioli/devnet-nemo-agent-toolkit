@@ -8,6 +8,7 @@ include = ["aiq", "nat.*"]
 
 [tool.setuptools_scm]
 git_describe_command = "git describe --long --first-parent"
+fallback_version = "0.0.0"
 
 [project]
 name = "nvidia-nat"
