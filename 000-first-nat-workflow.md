@@ -43,7 +43,6 @@ tree getting_started/
 You should have a similar output:
 
 ```console
-(nemo-agent-toolkit-clone) outshift> tree getting_started/
 getting_started/
 ├── configs -> /home/ubuntu/work/nemo-agent-toolkit-clone/getting_started/src/getting_started/configs
 ├── data -> /home/ubuntu/work/nemo-agent-toolkit-clone/getting_started/src/getting_started/data
@@ -110,24 +109,24 @@ workflow:
 ```
 
 The above workflow configuration has the following components:
-- a [built-in `current_datetime`](https://docs.nvidia.com/nemo/agent-toolkit/latest/api/nat/tool/datetime_tools/index.html#nat.tool.datetime_tools.current_datetime) function
-- a workflow-defined `getting_started` function
-- an LLM
-- an entrypoint workflow of a [built-in ReAct agent](https://docs.nvidia.com/nemo/agent-toolkit/latest/workflows/about/react-agent.html)
+- a [built-in `current_datetime`](https://docs.nvidia.com/nemo/agent-toolkit/latest/api/nat/tool/datetime_tools/index.html#nat.tool.datetime_tools.current_datetime) function.  
+- a workflow-defined `getting_started` function.  
+- an LLM.  
+- an entrypoint workflow of a [built-in ReAct agent](https://docs.nvidia.com/nemo/agent-toolkit/latest/workflows/about/react-agent.html).  
 
-By default, we create a [ReAct agent](https://docs.nvidia.com/nemo/agent-toolkit/latest/workflows/about/react-agent.html) equipped with both of the functions above. When called, the Agent decides which functions to call (if any) based on the intent of user input. The agent uses the LLM to help make reasoning decisions and then performs a subsequent action.
+By default, we create a [ReAct agent](https://docs.nvidia.com/nemo/agent-toolkit/latest/workflows/about/react-agent.html) equipped with both of the functions above. When called, the Agent decides which functions to call (if any) based on the intent of user input. The agent uses the LLM to help make reasoning decisions and then performs a subsequent action.  
 
-This workflow configuration file is a YAML-serialized version of the [`Config`](https://docs.nvidia.com/nemo/agent-toolkit/latest/api/nat/data_models/config/index.html#nat.data_models.config.Config) class. Each category within the high-level configuration specifies runtime configuration settings for their corresponding components. For instance, the `workflow` category contains all configuration settings for the workflow entrypoint. This configuration file is validated as typed Pydantic models and fields. All configuration classes have validation rules, default values, and [documentation](https://docs.nvidia.com/nemo/agent-toolkit/latest/workflows/workflow-configuration.html#workflow-configuration-file) which enable type-safe configuration management, automatic schema generation, and validation across the entire plugin ecosystem.
+This workflow configuration file is a YAML-serialized version of the [`Config`](https://docs.nvidia.com/nemo/agent-toolkit/latest/api/nat/data_models/config/index.html#nat.data_models.config.Config) class. Each category within the high-level configuration specifies runtime configuration settings for their corresponding components. For instance, the `workflow` category contains all configuration settings for the workflow entrypoint. This configuration file is validated as typed Pydantic models and fields. All configuration classes have validation rules, default values, and [documentation](https://docs.nvidia.com/nemo/agent-toolkit/latest/workflows/workflow-configuration.html#workflow-configuration-file) which enable type-safe configuration management, automatic schema generation, and validation across the entire plugin ecosystem.  
 
-* `general` - General configuration section. Contains high-level configurations for front-end definitions.
-* `authentication` - Authentication provides an interface for defining and interacting with various authentication providers.
-* `llms` - LLMs provide an interface for interacting with LLM providers.
-* `embedders` - Embedders provide an interface for interacting with embedding model providers.
-* `retreivers` - Retrievers provide an interface for searching and retrieving documents.
-* `memory` - Configurations for Memory. Memories provide an interface for storing and retrieving.
-* `object_stores` - Object Stores provide a CRUD interface for objects and data.
-* `eval` - The evaluation section provides configuration options related to the profiling and evaluation of NAT workflows.
-* `tcc_strategies` (experimental) - Test Time Compute (TTC) strategy definitions.
+* `general` - General configuration section. Contains high-level configurations for front-end definitions.   
+* `authentication` - Authentication provides an interface for defining and interacting with various authentication providers.   
+* `llms` - LLMs provide an interface for interacting with LLM providers.   
+* `embedders` - Embedders provide an interface for interacting with embedding model providers.   
+* `retreivers` - Retrievers provide an interface for searching and retrieving documents.   
+* `memory` - Configurations for Memory. Memories provide an interface for storing and retrieving.   
+* `object_stores` - Object Stores provide a CRUD interface for objects and data.   
+* `eval` - The evaluation section provides configuration options related to the profiling and evaluation of NAT workflows.   
+* `tcc_strategies` (experimental) - Test Time Compute (TTC) strategy definitions.   
 
 ### Type Safety and Validation
 
@@ -180,7 +179,7 @@ cat getting_started/src/getting_started/getting_started.py ; echo
 You should have the following output:
 
 ```python
-(nemo-agent-toolkit-clone) outshift> cat getting_started/src/getting_started/getting_started.py ; echo
+getting_started.py ; echo
 import logging
 
 from pydantic import Field
@@ -243,16 +242,16 @@ NeMo Agent toolkit relies on a configuration with builder pattern to define most
 
 The parameters to the decorated function are always:
 
-1. the configuration type of the function component (FunctionBaseConfig)
-2. a Builder which can be used to dynamically query and get other workflow components (Builder)
+1. the configuration type of the function component (FunctionBaseConfig).  
+2. a Builder which can be used to dynamically query and get other workflow components (Builder).  
 
 ### Function Implementation
 
-The core logic of the `getting_started` function is embedded as a function within the outer function registration. This is done for a few reasons:
+The core logic of the `getting_started` function is embedded as a function within the outer function registration. This is done for a few reasons:   
 
-* Enables dynamic importing of libraries and modules on an as-needed basis.
-* Enables context manager-like resources within to support automatic closing of resources.
-* Provides the most flexibility to users when defining their own functions.
+* Enables dynamic importing of libraries and modules on an as-needed basis.   
+* Enables context manager-like resources within to support automatic closing of resources.   
+* Provides the most flexibility to users when defining their own functions.   
 
 Near the end of the function registration implementation, we `yield` a `FunctionInfo` object. `FunctionInfo` is a wrapper around any type of function. It is also possible to specify additional information such as schema and converters if your function relies on transformations.
 
