@@ -256,4 +256,58 @@ nat run --config_file=retail_sales_agent/configs/config_rag.yml \
     --input "What is the Ark S12 Ultra tablet and what are its specifications?"
 ```
 
+You should have the following output:
+
+```console
+2026-01-04 18:32:04 - INFO     - nat.cli.commands.start:192 - Starting NAT from config file: 'retail_sales_agent/configs/config_rag.yml'
+2026-01-04 18:32:06 - INFO     - retail_sales_agent.llama_index_rag_tool:48 - Loaded 1 documents from data/rag/
+
+Configuration Summary:
+--------------------
+Workflow Type: react_agent
+Number of Functions: 4
+Number of Function Groups: 0
+Number of LLMs: 1
+Number of Embedders: 1
+Number of Memory: 0
+Number of Object Stores: 0
+Number of Retrievers: 0
+Number of TTC Strategies: 0
+Number of Authentication Providers: 0
+
+2026-01-04 18:32:09 - INFO     - nat.agent.react_agent.agent:183 - 
+------------------------------
+[AGENT]
+Agent input: What is the Ark S12 Ultra tablet and what are its specifications?
+Agent's thoughts: 
+Thought: The user is asking about the Ark S12 Ultra tablet and its specifications. I should use the product catalog tool to retrieve the relevant information.
+
+Action: product_catalog_rag
+Action Input: {"inputs": "Ark S12 Ultra tablet specifications"}
+------------------------------
+2026-01-04 18:32:12 - INFO     - nat.agent.base:221 - 
+------------------------------
+[AGENT]
+Calling tools: product_catalog_rag
+Tool's input: {'inputs': 'Ark S12 Ultra tablet specifications'}
+Tool's response: 
+The Ark S12 Ultra tablet features a 12.9-inch OLED display with a 144Hz refresh rate, HDR10+ dynamic range, a resolution of 2800 x 1752 pixels, and a contrast ratio of 1,000,000:1. It supports true tone adaptation and low blue-light filtering for extended use. Internally, it is powered by Qualcomm's Snapdragon 8 Gen 3 SoC, which includes an Adreno 750 GPU and an NPU for on-device AI tasks. The device comes with 16GB LPDDR5X RAM and 512GB of storage, with support for NVMe expansion via a proprietary magnetic dock. The 11200mAh battery provides up to 15 hours of typical use and can recharge to 80% in 45 minutes using 45W USB-C PD.
+
+The tablet supports NebulynVerse, a multitasking environment with external display mirroring, overlapping windows, and keyboard shortcuts. Input options include the Pluma Stylus 3, which offers 4096 pressure levels, tilt detection, magnetic charging, and haptic feedback, as well as a SnapCover keyboard with a trackpad and programmable shortcut keys. Camera har...(rest of response truncated)
+------------------------------
+2026-01-04 18:32:14 - INFO     - nat.agent.react_agent.agent:207 - 
+------------------------------
+[AGENT]
+Agent input: What is the Ark S12 Ultra tablet and what are its specifications?
+Agent's thoughts: 
+Thought: I now know the specifications of the Ark S12 Ultra tablet.
+
+Final Answer: The Ark S12 Ultra tablet features a 12.9-inch OLED display with a 144Hz refresh rate, HDR10+ dynamic range, and a resolution of 2800 x 1752 pixels. It is powered by Qualcomm's Snapdragon 8 Gen 3 SoC, includes 16GB LPDDR5X RAM, 512GB storage (expandable via NVMe dock), and a 11200mAh battery with fast charging. It supports NebulynVerse multitasking, Pluma Stylus 3, SnapCover keyboard, and advanced connectivity options like Wi-Fi 7 and optional LTE/5G. It runs on NebulynOS 6.0, based on Android 14L, and includes features like app sandboxing and multi-user profiles.
+------------------------------
+2026-01-04 18:32:14 - INFO     - nat.front_ends.console.console_front_end_plugin:102 - --------------------------------------------------
+Workflow Result:
+["The Ark S12 Ultra tablet features a 12.9-inch OLED display with a 144Hz refresh rate, HDR10+ dynamic range, and a resolution of 2800 x 1752 pixels. It is powered by Qualcomm's Snapdragon 8 Gen 3 SoC, includes 16GB LPDDR5X RAM, 512GB storage (expandable via NVMe dock), and a 11200mAh battery with fast charging. It supports NebulynVerse multitasking, Pluma Stylus 3, SnapCover keyboard, and advanced connectivity options like Wi-Fi 7 and optional LTE/5G. It runs on NebulynOS 6.0, based on Android 14L, and includes features like app sandboxing and multi-user profiles."]
+--------------------------------------------------
+```
+
 **Note** _the significance of what we've achieved in just a few lines of code: a reasoning agent was brought up with tool calls that allow it the execute predefined python functions to achieve what an LLM alone cannot. Additionally, we've incorporated context retrieval RAG into the same workflow so that the agent can access domain-specific or real time data sources that it's backbone LLM has never seen during training._

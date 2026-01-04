@@ -568,6 +568,73 @@ In the output, we expect to see calls to the `total_product_sales_data` tool.
 nat run --config_file=retail_sales_agent/configs/config.yml --input "How do laptop sales compare to phone sales?"
 ```
 
+You should have the following output:  
+
+```console
+2026-01-04 18:19:45 - INFO     - nat.cli.commands.start:192 - Starting NAT from config file: 'retail_sales_agent/configs/config.yml'
+
+Configuration Summary:
+--------------------
+Workflow Type: react_agent
+Number of Functions: 3
+Number of Function Groups: 0
+Number of LLMs: 1
+Number of Embedders: 0
+Number of Memory: 0
+Number of Object Stores: 0
+Number of Retrievers: 0
+Number of TTC Strategies: 0
+Number of Authentication Providers: 0
+
+2026-01-04 18:19:47 - INFO     - nat.agent.react_agent.agent:175 - 
+------------------------------
+[AGENT]
+Agent input: How do laptop sales compare to phone sales?
+Agent's thoughts: 
+Thought: To compare laptop sales to phone sales, I need to retrieve the total sales data for both products.
+Action: total_product_sales_data
+Action Input: {"product_name": "laptop"}
+------------------------------
+2026-01-04 18:19:47 - INFO     - nat.agent.base:221 - 
+------------------------------
+[AGENT]
+Calling tools: total_product_sales_data
+Tool's input: {'product_name': 'laptop'}
+Tool's response: 
+Revenue for laptop are 512000 and total units sold are 512
+------------------------------
+2026-01-04 18:19:49 - INFO     - nat.agent.react_agent.agent:199 - 
+------------------------------
+[AGENT]
+Agent input: How do laptop sales compare to phone sales?
+Agent's thoughts: 
+Thought: I now need to retrieve the total sales data for phones to complete the comparison.
+Action: total_product_sales_data
+Action Input: {"product_name": "phone"}
+------------------------------
+2026-01-04 18:19:49 - INFO     - nat.agent.base:221 - 
+------------------------------
+[AGENT]
+Calling tools: total_product_sales_data
+Tool's input: {'product_name': 'phone'}
+Tool's response: 
+Revenue for phone are 561000 and total units sold are 1122
+------------------------------
+2026-01-04 18:19:50 - INFO     - nat.agent.react_agent.agent:199 - 
+------------------------------
+[AGENT]
+Agent input: How do laptop sales compare to phone sales?
+Agent's thoughts: 
+Thought: I now have the sales data for both laptops and phones. I can compare their revenue and units sold.
+
+Final Answer: Laptop sales generated a revenue of $512,000 with 512 units sold, while phone sales generated a higher revenue of $561,000 with 1,122 units sold. Phones outperformed laptops in both revenue and units sold.
+------------------------------
+2026-01-04 18:19:50 - INFO     - nat.front_ends.console.console_front_end_plugin:102 - --------------------------------------------------
+Workflow Result:
+['Laptop sales generated a revenue of $512,000 with 512 units sold, while phone sales generated a higher revenue of $561,000 with 1,122 units sold. Phones outperformed laptops in both revenue and units sold.']
+--------------------------------------------------
+```
+
 In this next query we ask what were the laptop sales on a specific date.
 
 In the output, we expect to see a call to the `sales_per_day` tool.
@@ -576,11 +643,112 @@ In the output, we expect to see a call to the `sales_per_day` tool.
 nat run --config_file=retail_sales_agent/configs/config.yml --input "What were the laptop sales on February 16th 2024?"
 ```
 
+You should have the following output:  
+
+```console
+2026-01-04 18:22:06 - INFO     - nat.cli.commands.start:192 - Starting NAT from config file: 'retail_sales_agent/configs/config.yml'
+
+Configuration Summary:
+--------------------
+Workflow Type: react_agent
+Number of Functions: 3
+Number of Function Groups: 0
+Number of LLMs: 1
+Number of Embedders: 0
+Number of Memory: 0
+Number of Object Stores: 0
+Number of Retrievers: 0
+Number of TTC Strategies: 0
+Number of Authentication Providers: 0
+
+2026-01-04 18:22:09 - INFO     - nat.agent.react_agent.agent:175 - 
+------------------------------
+[AGENT]
+Agent input: What were the laptop sales on February 16th 2024?
+Agent's thoughts: 
+Thought: I need to calculate the total sales data for laptops on February 16th, 2024.
+Action: sales_per_day
+Action Input: {"date": "2024-02-16", "product": "laptop"}
+------------------------------
+2026-01-04 18:22:09 - INFO     - nat.agent.base:221 - 
+------------------------------
+[AGENT]
+Calling tools: sales_per_day
+Tool's input: {'date': '2024-02-16', 'product': 'laptop'}
+Tool's response: 
+Total revenue for 2024-02-16 is 13000 and total units sold is 13
+------------------------------
+2026-01-04 18:22:10 - INFO     - nat.agent.react_agent.agent:199 - 
+------------------------------
+[AGENT]
+Agent input: What were the laptop sales on February 16th 2024?
+Agent's thoughts: 
+Thought: I now know the total sales data for laptops on February 16th, 2024.
+Final Answer: On February 16th, 2024, the total revenue for laptop sales was $13,000, with 13 units sold.
+------------------------------
+2026-01-04 18:22:10 - INFO     - nat.front_ends.console.console_front_end_plugin:102 - --------------------------------------------------
+Workflow Result:
+['On February 16th, 2024, the total revenue for laptop sales was $13,000, with 13 units sold.']
+--------------------------------------------------
+```
+
 In the last query we ask if there were any outliers in sales.
 
 In the output, we expect to see a call to the `detect_outliers` tool.
 
 ```bash
 nat run --config_file=retail_sales_agent/configs/config.yml --input "What were the outliers in 'Revenue'?"
+```
+
+You should have the following output: 
+
+```console
+2026-01-04 18:23:32 - INFO     - nat.cli.commands.start:192 - Starting NAT from config file: 'retail_sales_agent/configs/config.yml'
+
+Configuration Summary:
+--------------------
+Workflow Type: react_agent
+Number of Functions: 3
+Number of Function Groups: 0
+Number of LLMs: 1
+Number of Embedders: 0
+Number of Memory: 0
+Number of Object Stores: 0
+Number of Retrievers: 0
+Number of TTC Strategies: 0
+Number of Authentication Providers: 0
+
+2026-01-04 18:23:34 - INFO     - nat.agent.react_agent.agent:175 - 
+------------------------------
+[AGENT]
+Agent input: What were the outliers in 'Revenue'?
+Agent's thoughts: 
+Thought: I need to detect outliers in the 'Revenue' metric to answer the question.
+Action: detect_outliers
+Action Input: {"metric": "Revenue"}
+------------------------------
+2026-01-04 18:23:34 - INFO     - nat.agent.base:221 - 
+------------------------------
+[AGENT]
+Calling tools: detect_outliers
+Tool's input: {'metric': 'Revenue'}
+Tool's response: 
+Outliers in Revenue are [{'Date': '2024-01-26', 'StoreID': 'S002', 'Product': 'Phone', 'UnitsSold': 24, 'Revenue': 12000, 'Promotion': 'Yes'}, {'Date': '2024-02-15', 'StoreID': 'S001', 'Product': 'Phone', 'UnitsSold': 26, 'Revenue': 13000, 'Promotion': 'Yes'}]
+------------------------------
+2026-01-04 18:23:35 - INFO     - nat.agent.react_agent.agent:199 - 
+------------------------------
+[AGENT]
+Agent input: What were the outliers in 'Revenue'?
+Agent's thoughts: 
+Thought: I now know the outliers in 'Revenue'.
+Final Answer: The outliers in 'Revenue' are:
+
+1. Date: 2024-01-26, StoreID: S002, Product: Phone, UnitsSold: 24, Revenue: 12000, Promotion: Yes
+2. Date: 2024-02-15, StoreID: S001, Product: Phone, UnitsSold: 26, Revenue: 13000, Promotion: Yes
+------------------------------
+2026-01-04 18:23:35 - INFO     - nat.front_ends.console.console_front_end_plugin:102 - --------------------------------------------------
+Workflow Result:
+["The outliers in 'Revenue' are:\n\n1. Date: 2024-01-26, StoreID: S002, Product: Phone, UnitsSold: 24, Revenue: 12000, Promotion: Yes\n2. Date: 2024-02-15, StoreID: S001, Product: Phone, UnitsSold: 26, Revenue: 13000, Promotion: Yes"]
+--------------------------------------------------
 ```
 

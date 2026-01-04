@@ -335,6 +335,115 @@ nat run --config_file retail_sales_agent/configs/config_multi_agent.yml \
   --input "Plot average daily revenue"
 ```
 
+You should have the following output:
+
+```console
+2026-01-04 19:23:24 - INFO     - nat.cli.commands.start:192 - Starting NAT from config file: 'retail_sales_agent/configs/config_multi_agent.yml'
+2026-01-04 19:23:27 - INFO     - matplotlib.font_manager:1639 - generated new fontManager
+2026-01-04 19:23:30 - INFO     - retail_sales_agent.llama_index_rag_tool:48 - Loaded 1 documents from data/rag/
+
+Configuration Summary:
+--------------------
+Workflow Type: react_agent
+Number of Functions: 10
+Number of Function Groups: 0
+Number of LLMs: 1
+Number of Embedders: 1
+Number of Memory: 0
+Number of Object Stores: 0
+Number of Retrievers: 0
+Number of TTC Strategies: 0
+Number of Authentication Providers: 0
+
+2026-01-04 19:23:32 - INFO     - nat.agent.react_agent.agent:183 - 
+------------------------------
+[AGENT]
+Agent input: Plot average daily revenue
+Agent's thoughts: 
+Thought: I need to ask the data visualization expert to create a plot for the average daily revenue.
+Action: data_visualization_agent
+Action Input: {"input_message":"Plot average daily revenue"}
+------------------------------
+2026-01-04 19:23:32 - INFO     - nat.agent.react_agent.agent:183 - 
+------------------------------
+[AGENT]
+Agent input: What is the Ark S12 Ultra tablet and what are its specifications?
+Agent's thoughts: 
+Question: What is the Ark S12 Ultra tablet and what are its specifications?
+Thought: I should use the product catalog to find information about the Ark S12 Ultra tablet and its specifications.
+Action: rag_agent
+Action Input: {"input_message": "What is the Ark S12 Ultra tablet and what are its specifications?"}
+------------------------------
+2026-01-04 19:23:32 - INFO     - nat.agent.react_agent.agent:183 - 
+------------------------------
+[AGENT]
+Agent input: How do laptop sales compare to phone sales?
+Agent's thoughts: 
+Thought: I need to analyze the sales data for laptops and phones to compare their sales. I will ask the data analysis agent to provide this comparison.
+
+Action: data_analysis_agent
+Action Input: {"input_message": "Compare laptop sales to phone sales in the dataset."}
+------------------------------
+2026-01-04 19:23:37 - INFO     - nat.agent.base:221 - 
+------------------------------
+[AGENT]
+Calling tools: data_analysis_agent
+Tool's input: {'input_message': 'Compare laptop sales to phone sales in the dataset.'}
+Tool's response: 
+Here is the comparison between laptop and phone sales:
+
+- **Laptop Sales**: Total revenue is $512,000, with 512 units sold.
+- **Phone Sales**: Total revenue is $561,000, with 1,122 units sold.
+
+Phones have higher revenue and significantly more units sold compared to laptops.
+------------------------------
+2026-01-04 19:23:37 - INFO     - nat.agent.base:221 - 
+------------------------------
+[AGENT]
+Calling tools: data_visualization_agent
+Tool's input: {'input_message': 'Plot average daily revenue'}
+Tool's response: 
+The average daily revenue plot has been saved to "average_daily_revenue.png". You can view the file
+------------------------------
+2026-01-04 19:23:38 - INFO     - nat.agent.react_agent.agent:207 - 
+------------------------------
+[AGENT]
+Agent input: How do laptop sales compare to phone sales?
+Agent's thoughts: 
+Thought: I now know the final answer.
+
+Final Answer: Phones have higher revenue ($561,000) and significantly more units sold (1,122 units) compared to laptops, which have a total revenue of $512,000 and 512 units sold.
+------------------------------
+2026-01-04 19:23:38 - INFO     - nat.agent.react_agent.agent:207 - 
+------------------------------
+[AGENT]
+Agent input: Plot average daily revenue
+Agent's thoughts: 
+Thought: I now know the final answer.
+Final Answer: The average daily revenue plot has been saved as "average_daily_revenue.png". You can view the file to see the visualization.
+------------------------------
+2026-01-04 19:23:39 - INFO     - nat.agent.base:221 - 
+------------------------------
+[AGENT]
+Calling tools: rag_agent
+Tool's input: {'input_message': 'What is the Ark S12 Ultra tablet and what are its specifications?'}
+Tool's response: 
+The Ark S12 Ultra tablet features a 12.9-inch OLED display with a 144Hz refresh rate, HDR10+ dynamic range, and a resolution of 2800 x 1752 pixels. It is powered by Qualcomm's Snapdragon 8 Gen 3 SoC, includes 16GB LPDDR5X RAM, 512GB storage (expandable via NVMe), and a 11200mAh battery with fast charging. It supports NebulynVerse multitasking, the Pluma Stylus 3, and the SnapCover keyboard. The tablet has a 13MP main camera, a 12MP ultra-wide front camera, and connectivity options like Wi-Fi 7, Bluetooth 5.3, and optional LTE/5G. It runs on NebulynOS 6.0, based on Android 14L.
+------------------------------
+2026-01-04 19:23:41 - INFO     - nat.agent.react_agent.agent:207 - 
+------------------------------
+[AGENT]
+Agent input: What is the Ark S12 Ultra tablet and what are its specifications?
+Agent's thoughts: 
+Thought: I now know the final answer.
+Final Answer: The Ark S12 Ultra tablet features a 12.9-inch OLED display with a 144Hz refresh rate, HDR10+ dynamic range, and a resolution of 2800 x 1752 pixels. It is powered by Qualcomm's Snapdragon 8 Gen 3 SoC, includes 16GB LPDDR5X RAM, 512GB storage (expandable via NVMe), and a 11200mAh battery with fast charging. It supports NebulynVerse multitasking, the Pluma Stylus 3, and the SnapCover keyboard. The tablet has a 13MP main camera, a 12MP ultra-wide front camera, and connectivity options like Wi-Fi 7, Bluetooth 5.3, and optional LTE/5G. It runs on NebulynOS 6.0, based on Android 14L.
+------------------------------
+2026-01-04 19:23:41 - INFO     - nat.front_ends.console.console_front_end_plugin:102 - --------------------------------------------------
+Workflow Result:
+["The Ark S12 Ultra tablet features a 12.9-inch OLED display with a 144Hz refresh rate, HDR10+ dynamic range, and a resolution of 2800 x 1752 pixels. It is powered by Qualcomm's Snapdragon 8 Gen 3 SoC, includes 16GB LPDDR5X RAM, 512GB storage (expandable via NVMe), and a 11200mAh battery with fast charging. It supports NebulynVerse multitasking, the Pluma Stylus 3, and the SnapCover keyboard. The tablet has a 13MP main camera, a 12MP ultra-wide front camera, and connectivity options like Wi-Fi 7, Bluetooth 5.3, and optional LTE/5G. It runs on NebulynOS 6.0, based on Android 14L.", 'Phones have higher revenue ($561,000) and significantly more units sold (1,122 units) compared to laptops, which have a total revenue of $512,000 and 512 units sold.', 'The average daily revenue plot has been saved as "average_daily_revenue.png". You can view the file to see the visualization.']
+--------------------------------------------------
+```
+
 ### Display the plot result
 
 <br>

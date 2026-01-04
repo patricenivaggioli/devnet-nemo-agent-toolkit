@@ -14,8 +14,8 @@ LABURL=`head -n 3 $ETIPATH/details | tail -1`
 #rm -f $ETIPATH/labinit/update/content/init/accounts
 
 # additional nginx config - if any reverse proxy needs to get configured
-#sudo cp -f $ETIPATH/labinit/update/content/init/nginx_example /etc/nginx/sites-enabled
-#sudo nginx -s reload
+sudo cp -f $ETIPATH/labinit/update/content/init/nginx/* /etc/nginx/sites-enabled
+sudo nginx -s reload
 
 # ...
 #sudo apt-get update && sudo apt-get install -y gpg lsb-release

@@ -266,6 +266,15 @@ The `register.py` file tells NAT what should automatically be imported so it is 
 cat getting_started/src/getting_started/register.py ; echo
 ```
 
+You should have the following output:
+
+```python
+# flake8: noqa
+
+# Import the generated workflow function to trigger registration
+from .getting_started import getting_started_function
+```
+
 ## 1.5 Running Your First Workflow
 
 ### 1.5.1 Run with the CLI
