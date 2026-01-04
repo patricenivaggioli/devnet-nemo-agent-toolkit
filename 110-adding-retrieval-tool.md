@@ -11,7 +11,7 @@ Just like with section 2 above, we will define our new tool by writing to a new 
 Note: In a real‑world scenario, it is not recommended to upsert records at query time due to latency. However, the simplistic approach below is adequate for this demo.
 
 ```bash
-cd ~/work/nemo-agent-toolkit-clone/
+cd ~/nemo-agent-toolkit/
 cat > retail_sales_agent/src/retail_sales_agent/llama_index_rag_tool.py <<'EOF'
 import logging
 import os
@@ -113,7 +113,7 @@ The key additions are:
 > **Note:** _The only impactful change to the top-level agent was the addition of the new RAG agent. All other changes to the configuration were for enabling the RAG agent._
 
 ```bash
-cd ~/work/nemo-agent-toolkit-clone/
+cd ~/nemo-agent-toolkit/
 cat > retail_sales_agent/configs/config_rag.yml <<'EOF'
 llms:
   azure_llm:

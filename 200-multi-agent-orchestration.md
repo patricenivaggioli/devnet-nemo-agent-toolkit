@@ -26,7 +26,7 @@ This is a new set of tools that will be registered to the data analysis and plot
 ### Define Analysis/Plotting Tools
 
 ```bash
-cd ~/work/nemo-agent-toolkit-clone/
+cd ~nemo-agent-toolkit/
 cat > retail_sales_agent/src/retail_sales_agent/data_visualization_tools.py <<'EOF'
 from pydantic import Field
 
@@ -156,7 +156,7 @@ uv pip install matplotlib
 ### Register the tools
 
 ```bash
-cd ~/work/nemo-agent-toolkit-clone/
+cd ~/nemo-agent-toolkit/
 cat >> retail_sales_agent/src/retail_sales_agent/register.py <<'EOF'
 
 from . import data_visualization_tools
@@ -197,7 +197,7 @@ This architecture provides several benefits:
 **Note:** _You will notice in the below configuration that no tools are directly called by the workflow-level agent. Instead, it delegates specifically to expert agents based on the request_
 
 ```bash
-cd ~/work/nemo-agent-toolkit-clone/
+cd ~/nemo-agent-toolkit/
 cat > retail_sales_agent/configs/config_multi_agent.yml <<'EOF'
 llms:
   azure_llm:
@@ -328,7 +328,7 @@ EOF
 Next we can run the workflow:
 
 ```bash
-cd ~/work/nemo-agent-toolkit-clone/
+cd ~/nemo-agent-toolkit/
 nat run --config_file retail_sales_agent/configs/config_multi_agent.yml \
   --input "What is the Ark S12 Ultra tablet and what are its specifications?" \
   --input "How do laptop sales compare to phone sales?" \
@@ -338,5 +338,5 @@ nat run --config_file retail_sales_agent/configs/config_multi_agent.yml \
 ### Display the plot result
 
 <br>
-![Average Daily Revenue](/home/ubuntu/work/nemo-agent-toolkit-clone/average_daily_revenue.png)
+![Average Daily Revenue](/home/ubuntu/nemo-agent-toolkit/average_daily_revenue.png)
 <br>

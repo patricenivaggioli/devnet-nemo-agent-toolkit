@@ -11,7 +11,7 @@ This exemplifies how complete agent workflows can be wrapped and used as tools b
 The following steps define the approval tool and its registration.
 
 ```bash
-cd ~/work/nemo-agent-toolkit-clone/
+cd ~/nemo-agent-toolkit/
 cat > retail_sales_agent/src/retail_sales_agent/hitl_approval_tool.py <<'EOF'
 import logging
 
@@ -64,7 +64,7 @@ EOF
 ```
 
 ```bash
-cd ~/work/nemo-agent-toolkit-clone/
+cd ~/nemo-agent-toolkit/
 cat >> retail_sales_agent/src/retail_sales_agent/register.py <<'EOF'
 
 from . import hitl_approval_tool
@@ -76,7 +76,7 @@ EOF
 The following two steps define the graph summarizer tool and its registration.
 
 ```bash
-cd ~/work/nemo-agent-toolkit-clone/
+cd ~/nemo-agent-toolkit/
 cat > retail_sales_agent/src/retail_sales_agent/graph_summarizer_tool.py <<'EOF'
 from pydantic import Field
 
@@ -139,7 +139,7 @@ EOF
 ```
 
 ```bash
-cd ~/work/nemo-agent-toolkit-clone/
+cd ~/nemo-agent-toolkit/
 cat >> retail_sales_agent/src/retail_sales_agent/register.py <<'EOF'
 
 from . import graph_summarizer_tool
@@ -151,7 +151,7 @@ EOF
 The following two steps define the custom agent and its registration
 
 ```bash
-cd ~/work/nemo-agent-toolkit-clone/
+cd ~/nemo-agent-toolkit/
 cat > retail_sales_agent/src/retail_sales_agent/data_visualization_agent.py <<'EOF'
 import logging
 
@@ -336,7 +336,7 @@ EOF
 ```
 
 ```bash
-cd ~/work/nemo-agent-toolkit-clone/
+cd ~/nemo-agent-toolkit/
 cat >> retail_sales_agent/src/retail_sales_agent/register.py <<'EOF'
 
 from . import data_visualization_agent
@@ -353,7 +353,7 @@ The high-level changes include:
 - adding an OpenAI LLM for image summarization
 
 ```bash
-cd ~/work/nemo-agent-toolkit-clone/
+cd ~/nemo-agent-toolkit/
 cat > retail_sales_agent/configs/config_multi_agent_hitl.yml <<'EOF'
 llms:
   azure_llm:

@@ -9,7 +9,7 @@ Several data files are required for this example. To keep this as a stand-alone 
 The following commands creates the `data` directory as well as a `rag` subdirectory.
 
 ```bash
-cd ~/work/nemo-agent-toolkit-clone/
+cd ~/nemo-agent-toolkit/
 mkdir -p data/rag
 ```
 
@@ -405,7 +405,7 @@ As explained in detail in previous lab, we can use the `nat workflow create` sub
 Within this directory we can define all of the functions that we want to be available to the agent at runtime. In this notebook specifically we are going to demonstrate the integration of new tools to the workflow. We will make them available or 'discoverable' by the agent by defining these tool calls within the `register.py` function.
 
 ```bash
-cd ~/work/nemo-agent-toolkit-clone/
+cd ~/nemo-agent-toolkit/
 nat workflow create retail_sales_agent
 ```
 

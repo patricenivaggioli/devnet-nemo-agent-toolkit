@@ -5,7 +5,7 @@ In this lab, we will walk through the advanced capabilities of NVIDIA NeMo Agent
 ## Register the required tools
 
 ```bash
-cd ~/work/nemo-agent-toolkit-clone/
+cd ~/nemo-agent-toolkit/
 cat > retail_sales_agent/src/retail_sales_agent/register.py <<'EOF'
 
 from . import sales_per_day_tool
@@ -21,7 +21,7 @@ EOF
 The following step creates a basic workflow configuration file:
 
 ```bash
-cd ~/work/nemo-agent-toolkit-clone/
+cd ~/nemo-agent-toolkit/
 cat > retail_sales_agent/configs/config_multi_agent.yml <<'EOF'
 llms:
   azure_llm:
@@ -150,7 +150,7 @@ EOF
 ## Run the workflow
 
 ```bash
-cd ~/work/nemo-agent-toolkit-clone/
+cd ~/nemo-agent-toolkit/
 nat run --config_file retail_sales_agent/configs/config_multi_agent.yml \
   --input "What is the Ark S12 Ultra tablet and what are its specifications?" \
   --input "How do laptop sales compare to phone sales?" \
@@ -169,14 +169,14 @@ We will need to update the workflow configuration file to support telemetry trac
 To do this, we will first copy the original configuration:
 
 ```bash
-cd ~/work/nemo-agent-toolkit-clone/
+cd ~/nemo-agent-toolkit/
 cp retail_sales_agent/configs/config_multi_agent.yml retail_sales_agent/configs/phoenix_config.yml
 ```
 
 Then we will append necessary configuration components to the `phoenix_config.yml` file:
 
 ```bash
-cd ~/work/nemo-agent-toolkit-clone/
+cd ~/nemo-agent-toolkit/
 cat >> retail_sales_agent/configs/phoenix_config.yml <<'EOF'
 
 general:
@@ -235,7 +235,7 @@ For evaluating this workflow, we will created a sample dataset.
 The dataset will contain three test cases covering different query types. Each entry contains a question and the expected answer that the agent should provide.
 
 ```bash
-cd ~/work/nemo-agent-toolkit-clone/
+cd ~/nemo-agent-toolkit/
 cat > retail_sales_agent/data/eval_data.json <<'EOF'
 [
     {
@@ -264,14 +264,14 @@ Workflow configuration files can contain extra settings relevant for evaluation 
 To do this, we will first copy the original configuration:
 
 ```bash
-cd ~/work/nemo-agent-toolkit-clone/
+cd ~/nemo-agent-toolkit/
 cp retail_sales_agent/configs/config_multi_agent.yml retail_sales_agent/configs/config_eval.yml
 ```
 
 *Then* we will append necessary configuration components to the `config_eval.yml` file:
 
 ```bash
-cd ~/work/nemo-agent-toolkit-clone/
+cd ~/nemo-agent-toolkit/
 cat >> retail_sales_agent/configs/config_eval.yml <<'EOF'
 
 eval:
@@ -306,7 +306,7 @@ EOF
 The `nat eval` command executes the workflow against all entries in the dataset and evaluates the results using configured evaluators. Run the cell below to evaluate the retail sales agent workflow.
 
 ```bash
-cd ~/work/nemo-agent-toolkit-clone/
+cd ~/nemo-agent-toolkit/
 nat eval --config_file retail_sales_agent/configs/config_eval.yml
 ```
 
@@ -339,14 +339,14 @@ Workflow configuration files can contain extra settings relevant for evaluation 
 To do this, we will first copy the original configuration:
 
 ```bash
-cd ~/work/nemo-agent-toolkit-clone/
+cd ~/nemo-agent-toolkit/
 cp retail_sales_agent/configs/config_multi_agent.yml retail_sales_agent/configs/config_profile.yml
 ```
 
 *Then* we will append necessary configuration components to the `config_profile.yml` file:
 
 ```bash
-cd ~/work/nemo-agent-toolkit-clone/
+cd ~/nemo-agent-toolkit/
 cat >> retail_sales_agent/configs/config_profile.yml <<'EOF'
 
 eval:
@@ -406,7 +406,7 @@ The `output_dir` parameter specifies where all profiler outputs will be stored f
 The profiler runs as part of the `nat eval` command. When properly configured, it will collect performance data across all evaluation runs and generate comprehensive profiling reports.
 
 ```bash
-cd ~/work/nemo-agent-toolkit-clone/
+cd ~/nemo-agent-toolkit/
 nat eval --config_file retail_sales_agent/configs/config_profile.yml
 ```
 
