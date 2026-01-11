@@ -35,6 +35,11 @@
             "title": "Observability, Evaluation and Profiling",
             "file": "600-observability-evaluation-profiling",
             "panel": "terminal"
+        },
+        {
+            "title": "Model Context Protocol",
+            "file": "700-mcp",
+            "panel": "terminal"
         }
     ]
 }
