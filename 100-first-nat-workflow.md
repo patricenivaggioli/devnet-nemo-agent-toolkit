@@ -6,16 +6,12 @@ In this first lab, we walk through the basics of using NVIDIA NeMo Agent toolkit
 
 ```bash
 cd ~/nemo-agent-toolkit/
-```
-
-```bash
-export SETUPTOOLS_SCM_PRETEND_VERSION="0.0.0"
-export SETUPTOOLS_SCM_PRETEND_VERSION_FOR_NVIDIA_NAT="0.0.0"
 uv sync
 ```
 
 ```bash
 source .venv/bin/activate
+cp agent.py .venv/lib/python3.13/site-packages/nat/agent/react_agent/agent.py
 ```
 
 It is also possible to install sub packages with pip: `uv pip install "nvidia-nat[langchain]"`
@@ -160,12 +156,6 @@ workflow:
     - current_datetime
     - getting_started
 EOF
-```
-
-And we need also to fix the `agent.py` script from the NAT library:
-
-```console
-cp ~/work/agent.py .venv/lib/python3.13/site-packages/nat/agent/react_agent/agent.py
 ```
 
 ## 1.4 Interpreting Workflow Functions
