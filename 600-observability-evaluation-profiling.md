@@ -1,8 +1,8 @@
-# Tracing, Evaluating, and Profiling your Agent
+# 6. Tracing, Evaluating, and Profiling your Agent
 
 In this lab, we will walk through the advanced capabilities of NVIDIA NeMo Agent toolkit (NAT) for <a href="https://docs.nvidia.com/nemo/agent-toolkit/latest/workflows/observe/index.html"> observability</a>, <a href="https://docs.nvidia.com/nemo/agent-toolkit/latest/workflows/evaluate.html">evaluation</a>, and <a href="https://docs.nvidia.com/nemo/agent-toolkit/latest/workflows/profiler.html">profiling</a>, from setting up Phoenix tracing to running comprehensive workflow assessments and performance analysis.
 
-## Register the required tools
+## 6.1 Register the required tools
 
 ```bash
 cd ~/nemo-agent-toolkit/
@@ -16,7 +16,7 @@ from . import data_visualization_tools
 EOF
 ```
 
-## Workflow Configuration File
+## 6.2 Workflow Configuration File
 
 The following step creates a basic workflow configuration file:
 
@@ -147,7 +147,7 @@ workflow:
 EOF
 ```
 
-## Run the workflow
+## 6.3 Run the workflow
 
 ```bash
 cd ~/nemo-agent-toolkit/
@@ -158,11 +158,11 @@ nat run --config_file retail_sales_agent/configs/config_multi_agent.yml \
 ```
 
 
-## Observing a Workflow with Phoenix
+## 6.4 Observing a Workflow with Phoenix
 
 Phoenix is an open-source observability platform designed for monitoring, debugging, and improving LLM applications and AI agents. It provides a web-based interface for visualizing and analyzing traces from LLM applications, agent workflows, and ML pipelines. Phoenix automatically captures key metrics such as latency, token usage, and costs, and displays the inputs and outputs at each step, making it invaluable for debugging complex agent behaviors and identifying performance bottlenecks in AI workflows.
 
-### Updating the Workflow Configuration For Telemetry
+### 6.4.1 Updating the Workflow Configuration For Telemetry
 
 We will need to update the workflow configuration file to support telemetry tracing with Phoenix.
 
@@ -193,13 +193,13 @@ general:
 EOF
 ```
 
-### Install Phoenix telemetry plugin
+### 6.4.2 Install Phoenix telemetry plugin
 
 ```bash
 uv pip install "nvidia-nat[phoenix]"
 ```
 
-### Start Phoenix Server
+### 6.4.3 Start Phoenix Server
 
 ```bash
 uv pip install arize-phoenix
@@ -207,7 +207,7 @@ export PHOENIX_HOST=0.0.0.0
 phoenix serve &
 ```
 
-### Rerun the Workflow
+### 6.4.4 Rerun the Workflow
 
 Instead of the original workflow configuration, we will run with the updated `phoenix_config.yml` file:
 
@@ -218,17 +218,17 @@ nat run --config_file retail_sales_agent/configs/phoenix_config.yml \
   --input "Plot average daily revenue"
 ```
 
-### Viewing the trace
+### 6.4.5 Viewing the trace
 
 You can access the Phoenix server at http://localhost:6006
 
-## Evaluating a Workflow
+## 6.5 Evaluating a Workflow
 
 After setting up observability, the next step is to evaluate your workflow's performance against a test dataset. NAT provides a powerful evaluation framework that can assess your agent's responses using various metrics and evaluators.
 
 For detailed information on evaluation, please refer to the [Evaluating NVIDIA NeMo Agent Toolkit Workflows](https://docs.nvidia.com/nemo/agent-toolkit/latest/workflows/evaluate.html).
 
-### Create an Evaluation Dataset
+### 6.5.1 Create an Evaluation Dataset
 
 For evaluating this workflow, we will created a sample dataset.
 
@@ -257,7 +257,7 @@ cat > retail_sales_agent/data/eval_data.json <<'EOF'
 EOF
 ```
 
-### Updating the Workflow Configuration
+### 6.5.2 Updating the Workflow Configuration
 
 Workflow configuration files can contain extra settings relevant for evaluation and profiling.
 
@@ -268,7 +268,7 @@ cd ~/nemo-agent-toolkit/
 cp retail_sales_agent/configs/config_multi_agent.yml retail_sales_agent/configs/config_eval.yml
 ```
 
-*Then* we will append necessary configuration components to the `config_eval.yml` file:
+Then, we will append necessary configuration components to the `config_eval.yml` file:
 
 ```bash
 cd ~/nemo-agent-toolkit/
@@ -301,7 +301,7 @@ eval:
 EOF
 ```
 
-### Running the Evaluation
+### 6.5.3 Running the Evaluation
 
 The `nat eval` command executes the workflow against all entries in the dataset and evaluates the results using configured evaluators. Run the cell below to evaluate the retail sales agent workflow.
 
@@ -310,14 +310,12 @@ cd ~/nemo-agent-toolkit/
 nat eval --config_file retail_sales_agent/configs/config_eval.yml
 ```
 
-### Understanding Evaluation Results
+### 6.5.4 Understanding Evaluation Results
 
 The `nat eval` command runs the workflow on all entries in the dataset and produces several output files:   
 
 - **`workflow_output.json`**: Contains the raw outputs from the workflow for each input in the dataset.  
 - **Evaluator-specific files**: Each configured evaluator generates its own output file with scores and reasoning.  
-
-#### Evaluation Scores
 
 Each evaluator provides:   
 - An **average score** across all dataset entries (0-1 scale, where 1 is perfect).  
@@ -326,13 +324,13 @@ Each evaluator provides:
 
 All evaluation results are stored in the `output_dir` specified in the configuration file.
 
-## Profiling a Workflow
+## 6.6 Profiling a Workflow
 
 Profiling provides deep insights into your workflow's performance characteristics, helping you identify bottlenecks, optimize resource usage, and improve overall efficiency.
 
 For detailed information on profiling, please refer to the [Profiling and Performance Monitoring of NVIDIA NeMo Agent Toolkit Workflows](https://docs.nvidia.com/nemo/agent-toolkit/latest/workflows/profiler.html).
 
-### Updating the Workflow Configuration
+### 6.6.1 Updating the Workflow Configuration
 
 Workflow configuration files can contain extra settings relevant for evaluation and profiling.
 
@@ -343,7 +341,7 @@ cd ~/nemo-agent-toolkit/
 cp retail_sales_agent/configs/config_multi_agent.yml retail_sales_agent/configs/config_profile.yml
 ```
 
-*Then* we will append necessary configuration components to the `config_profile.yml` file:
+Then, we will append necessary configuration components to the `config_profile.yml` file:
 
 ```bash
 cd ~/nemo-agent-toolkit/
@@ -373,13 +371,11 @@ eval:
 EOF
 ```
 
-### Understanding the Profiler Configuration
+### 6.6.2 Understanding the Profiler Configuration
 
 We will reuse the same configuration as evaluation.
 
 The profiler is configured through the `profiler` section of your workflow configuration file. It runs alongside the `nat eval` command and offers several analysis options:
-
-#### Key Configuration Options:
 
 - **`token_uniqueness_forecast`**: Computes the inter-query token uniqueness forecast, predicting the expected number of unique tokens in the next query based on tokens used in previous queries
 
@@ -397,11 +393,9 @@ The profiler is configured through the `profiler` section of your workflow confi
 
 - **`concurrency_spike_analysis`**: Identifies concurrency spikes in your workflow. The `spike_threshold` parameter (e.g., 7) determines when to flag spikes based on the number of concurrent running functions
 
-#### Output Directory
-
 The `output_dir` parameter specifies where all profiler outputs will be stored for later analysis.
 
-### Running the Profiler
+### 6.6.3 Running the Profiler
 
 The profiler runs as part of the `nat eval` command. When properly configured, it will collect performance data across all evaluation runs and generate comprehensive profiling reports.
 
@@ -410,7 +404,7 @@ cd ~/nemo-agent-toolkit/
 nat eval --config_file retail_sales_agent/configs/config_profile.yml
 ```
 
-### Understanding Profiler Output Files
+### 6.6.4 Understanding Profiler Output Files
 
 Based on the profiler configuration, the following files will be generated in the `output_dir`:
 
@@ -452,7 +446,7 @@ from IPython.display import Image
 Image("profile_output/gantt_chart.png")
 ```
 
-## Lab Summary
+## 6.7 Lab Summary
 
 In this notebook, we covered the complete workflow for observability, evaluation, and profiling in NeMo Agent Toolkit:
 

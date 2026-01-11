@@ -1,4 +1,4 @@
-# Multi Agent Orchestration
+# 4. Multi Agent Orchestration
 
 In this lab, we showcase how the NVIDIA NeMo Agent Toolkit (NAT) can be used to use a mixture of inbuilt tools and agents, as well as custom tools and workflows. Multi-agent orchestration is an important concept in many agentic AI facets: notably runtime and token efficiency. Here we aim to show how simple multi-agent orchestration is able to be implemented when using NAT. We show how an orchestration agent can call tools and sub-agents to facilitate complex tasks.
 
@@ -19,11 +19,11 @@ We demonstrate the following capabilities:
 * Human-in-the-Loop
 * Multi-agent support
 
-## Data Analysis/Plotting Tools
+## 4.1 Data Analysis/Plotting Tools
 
 This is a new set of tools that will be registered to the data analysis and plotting agent. This set of tools allows the registered agent to plot the results of upstream data analysis tasks.
 
-### Define Analysis/Plotting Tools
+### 4.1.1 Define Analysis/Plotting Tools
 
 ```bash
 cd ~/nemo-agent-toolkit/
@@ -145,7 +145,7 @@ async def plot_average_daily_revenue_function(config: PlotAverageDailyRevenueCon
 EOF
 ```
 
-### Install matplotlib
+### 4.1.2 Install matplotlib
 
 As `data_visualization_tools.py` uses `matplotlib` library, let's intall it:
 
@@ -153,7 +153,7 @@ As `data_visualization_tools.py` uses `matplotlib` library, let's intall it:
 uv pip install matplotlib
 ```
 
-### Register the tools
+### 4.1.3 Register the tools
 
 ```bash
 cd ~/nemo-agent-toolkit/
@@ -163,9 +163,9 @@ from . import data_visualization_tools
 EOF
 ```
 
-## Adding an Agent Orchestrator
+## 4.2 Adding an Agent Orchestrator
 
-### Agent Orchestrator Workflow Configuration File
+### 4.2.1 Agent Orchestrator Workflow Configuration File
 
 Next, we introduce a new workflow configuration file. Upon first glance, this configuration file may seem complex. However, when we classify the available tools and delegate them to an agent, it will begin to make intuitive sense how sub-tasks in a workflow can be divided amongst the best fit agent.
 
@@ -323,7 +323,7 @@ workflow:
 EOF
 ```
 
-### Running the Workflow
+### 4.2.2 Running the Workflow
 
 Next we can run the workflow:
 
@@ -444,7 +444,7 @@ Workflow Result:
 --------------------------------------------------
 ```
 
-### Display the plot result
+### 4.2.3 Display the plot result
 
 <br>
 ![Average Daily Revenue](/home/ubuntu/nemo-agent-toolkit/average_daily_revenue.png)

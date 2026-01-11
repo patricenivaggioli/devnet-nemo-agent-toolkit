@@ -1,12 +1,12 @@
-# Human In The Loop (HITL)
+# 5. Human In The Loop (HITL)
 
-## Adding a Custom Agent
+## 5.1 Adding a Custom Agent
 
 Besides using inbuilt agents in the workflows, we can also create custom agents using LangGraph or any other framework and bring them into a workflow. We demonstrate this by swapping out the ReAct agent used by the data visualization expert for a custom agent that has human-in-the-loop capability. The agent will ask the user whether they would like a summary of graph content.
 
 This exemplifies how complete agent workflows can be wrapped and used as tools by other agents, enabling complex multi-agent orchestration.
 
-### Human-in-the-Loop (HITL) Approval Tool
+### 5.1.1 Human-in-the-Loop (HITL) Approval Tool
 
 The following steps define the approval tool and its registration.
 
@@ -63,6 +63,7 @@ async def hitl_approval_function(config: HITLApprovalFnConfig, builder: Builder)
 EOF
 ```
 
+### 5.1.2  Register HITL Approval Tool
 ```bash
 cd ~/nemo-agent-toolkit/
 cat >> retail_sales_agent/src/retail_sales_agent/register.py <<'EOF'
@@ -71,7 +72,7 @@ from . import hitl_approval_tool
 EOF
 ```
 
-### Graph Summarizer Tool
+### 5.1.3 Graph Summarizer Tool
 
 The following two steps define the graph summarizer tool and its registration.
 
@@ -138,6 +139,8 @@ async def graph_summarizer_function(config: GraphSummarizerConfig, builder: Buil
 EOF
 ```
 
+### 5.1.4 Register the Graph Summarizer Tool
+
 ```bash
 cd ~/nemo-agent-toolkit/
 cat >> retail_sales_agent/src/retail_sales_agent/register.py <<'EOF'
@@ -146,7 +149,7 @@ from . import graph_summarizer_tool
 EOF
 ```
 
-### Custom Data Visualization Agent With HITL Approval
+### 5.1.5 Custom Data Visualization Agent With HITL Approval
 
 The following two steps define the custom agent and its registration
 
@@ -335,6 +338,8 @@ async def data_visualization_agent_function(config: DataVisualizationAgentConfig
 EOF
 ```
 
+### 5.1.6 Register the Data Visualization Agent
+
 ```bash
 cd ~/nemo-agent-toolkit/
 cat >> retail_sales_agent/src/retail_sales_agent/register.py <<'EOF'
@@ -343,7 +348,7 @@ from . import data_visualization_agent
 EOF
 ```
 
-## Custom Agent Workflow Configuration File
+## 5.2 Custom Agent Workflow Configuration File
 
 Next, we define the workflow configuration file for this custom agent.
 
@@ -506,7 +511,7 @@ workflow:
 EOF
 ```
 
-## Running the Workflow
+## 5.3 Running the Workflow
 
 ```bash
 nat run --config_file retail_sales_agent/configs/config_multi_agent_hitl.yml \
