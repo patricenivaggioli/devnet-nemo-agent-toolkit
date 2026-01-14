@@ -1,5 +1,7 @@
 # 2. Adding Tools To Agents
 
+![alt text](./images/lab2.png)
+
 In this lab, we showcase how the NVIDIA NeMo Agent Toolkit (NAT) allows developers to easily add tool-calling capabilities to agents that integrate with the library. Tool calling allows chain-of-thought planners to augment the pretrained capabilities of LLMs with predefined methods and access to context retrieval services. This is a powerful paradigm in agentic AI development that has enabled revolutionary technologies like deep research and API-integrated AI systems.
 
 ## 2.1 Data Sources

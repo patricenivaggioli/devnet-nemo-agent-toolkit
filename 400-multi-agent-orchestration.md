@@ -1,5 +1,7 @@
 # 4. Multi Agent Orchestration
 
+![alt text](./images/lab4.png)
+
 In this lab, we showcase how the NVIDIA NeMo Agent Toolkit (NAT) can be used to use a mixture of inbuilt tools and agents, as well as custom tools and workflows. Multi-agent orchestration is an important concept in many agentic AI facets: notably runtime and token efficiency. Here we aim to show how simple multi-agent orchestration is able to be implemented when using NAT. We show how an orchestration agent can call tools and sub-agents to facilitate complex tasks.
 
 By the conclusion of this example, we will create a simple mixture-of-agents that serves as an assistant in retail sales.

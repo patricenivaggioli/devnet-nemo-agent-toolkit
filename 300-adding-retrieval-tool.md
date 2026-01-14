@@ -1,5 +1,7 @@
 # 3. Adding a Retrieval Tool
 
+![alt text](./images/lab3.png)
+
 After basic tool calling has been demonstrated, adding context retrieval tools to our agent is a reasonable next step.
 
 In this section we will equip our agent with a tool that is capable of performing retrieval of additional context to answer questions about some new consumer products that the backbone model likely doesn't have pretrained knowledge of. It will use a vector store that stores details about products. We can create this agent using LlamaIndex to demonstrate the framework-agnostic capability of the library.
