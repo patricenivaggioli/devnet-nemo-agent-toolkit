@@ -11,7 +11,6 @@ uv sync
 
 ```bash
 source .venv/bin/activate
-cp agent.py .venv/lib/python3.13/site-packages/nat/agent/react_agent/agent.py
 ```
 
 It is also possible to install sub packages with pip: `uv pip install "nvidia-nat[langchain]"`
