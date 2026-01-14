@@ -82,7 +82,7 @@ As `langchain` subpackage is already installed, let's install `llama-index`:
 
 ```bash
 uv pip install "nvidia-nat[llama-index]"
-cp agent.py .venv/lib/python3.13/site-packages/nat/agent/react_agent/agent.py
+cp ~/agent.py .venv/lib/python3.13/site-packages/nat/agent/react_agent/agent.py
 ```
 
 ## 3.3 Defining the Retrieval Tool
