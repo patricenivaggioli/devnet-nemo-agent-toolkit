@@ -213,6 +213,8 @@ phoenix serve &
 
 Open a second terminal to rerun the workflow
 
+<a href="#"  onclick="showLabPanel(1,0); return false;">terminal</a>
+
 <a href="#"  onclick="showLabPanel(1,1); return false;" style="font-size:1.25em; background:#007cba; color:#fff; padding:10px 20px; border-radius:6px; text-decoration:none;">
   Open MyApp
 </a>   
