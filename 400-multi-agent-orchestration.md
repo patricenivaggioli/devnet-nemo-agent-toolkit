@@ -448,6 +448,8 @@ Workflow Result:
 
 ### 4.2.3 Display the plot result
 
-<br>
-![Average Daily Revenue](/home/ubuntu/nemo-agent-toolkit/average_daily_revenue.png)
-<br>
+<a href="#" on click="showImagePopup({ 
+src: 'images/lab1.png'}); return false;">
+Open image
+</a>
+
