@@ -23,8 +23,6 @@ sudo nginx -s reload
 # jupyter is not started by default, if you need it start it with
 sudo systemctl enable jupyter
 sudo service jupyter start
-sudo snap install astral-uv --classic
-sudo snap install tree
 
 
 
