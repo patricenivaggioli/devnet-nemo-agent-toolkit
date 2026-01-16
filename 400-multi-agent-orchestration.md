@@ -449,7 +449,7 @@ Workflow Result:
 ### 4.2.3 Display the plot result
 
 <a href="#" onclick="showImagePopup({ 
-src: 'images/lab1.png'}); return false;">
+src: 'lab/images/lab1.png'}); return false;">
 Open image
 </a>
 
