@@ -211,6 +211,12 @@ phoenix serve &
 
 ### 6.4.4 Rerun the Workflow
 
+Open a second terminal to rerun the workflow
+
+<a href="#"  onclick="showLabPanel(1,1); return false;" style="font-size:1.25em; background:#007cba; color:#fff; padding:10px 20px; border-radius:6px; text-decoration:none;">
+  Open MyApp
+</a>   
+
 Instead of the original workflow configuration, we will run with the updated `phoenix_config.yml` file:
 
 ```bash
