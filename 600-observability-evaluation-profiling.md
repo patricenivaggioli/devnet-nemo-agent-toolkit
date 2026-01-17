@@ -230,7 +230,7 @@ nat run --config_file retail_sales_agent/configs/phoenix_config.yml \
 
 ### 6.4.5 Viewing the trace
 
-You can access the Phoenix server at http://localhost:6006
+You can access the Phoenix server at https://%%LABURL%%:6100
 
 ## 6.5 Evaluating a Workflow
 
