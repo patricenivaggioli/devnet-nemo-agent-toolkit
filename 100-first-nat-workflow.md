@@ -61,19 +61,14 @@ getting_started/
         └── top_level.txt
 ```
 
+The nat workflow create command generates a valid pyproject.toml file with a plugin section that points to a register.py file that has been pre-populated with NeMo Agent toolkit programming model boiler plate code (`getting_started.py`). This boiler plate code should be further customized to implement the desired custom workflow (`register.py`) and necessary NeMo Agent toolkit components. 
+
 A summary of the high-level components are outlined below.
 
-* `configs` (symbolic link to `src/getting_started/configs`)
-* `data` (symbolic link to `src/getting_started/data`)
-* `pyproject.toml` Python project configuration file
-* `src`
-  * `getting_started`
-    * `__init__.py` Module init file (empty)
-    * `configs` Configuration directory for workflow specifications
-      * `config.yml` Workflow configuration file
-    * `data` Data directory for any dependent files
-    * `getting_started.py` User-defined code for workflow execution
-    * `register.py` Automatic registration of project components
+* `pyproject.toml` Python project configuration file that declaratively defines build tooling , project metadata and dependencies, entry points and tool configuration
+* `config.yml` Workflow configuration file is a YAML file that specifies the tools and models to use in a workflow, along with general configuration settings.
+* `getting_started.py` This file defines a custom NAT function (tool) and makes it discoverable and usable by NeMo Agent Toolkit–based agents.
+* `register.py` This file acts as a registration trigger module for NeMo Agent Toolkit.
 
 ###  1.3.1 Interpreting Configuration File
 
