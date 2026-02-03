@@ -75,7 +75,7 @@ A summary of the high-level components are outlined below.
 The workflow configuration file, `getting_started/configs/config.yml`, describes the operational characteristics of the entire workflow. Let's load its contents in the next cell and understand what this first workflow can do out of the box.
 
 ```bash
-cat getting_started/configs/config.yml; echo
+bat getting_started/configs/config.yml; echo
 ```
 
 You should have the following output:
@@ -114,7 +114,7 @@ This workflow configuration file is a YAML-serialized version of the [`Config`](
 * `authentication` - Authentication provides an interface for defining and interacting with various authentication providers.   
 * `llms` - LLMs provide an interface for interacting with LLM providers.   
 * `embedders` - Embedders provide an interface for interacting with embedding model providers.   
-* `retreivers` - Retrievers provide an interface for searching and retrieving documents.   
+* `retrievers` - Retrievers provide an interface for searching and retrieving documents.   
 * `memory` - Configurations for Memory. Memories provide an interface for storing and retrieving.   
 * `object_stores` - Object Stores provide a CRUD interface for objects and data.   
 * `eval` - The evaluation section provides configuration options related to the profiling and evaluation of NAT workflows.   
@@ -159,7 +159,7 @@ EOF
 Next, let's inspect the contents of the generated workflow function:
 
 ```bash
-cat getting_started/src/getting_started/getting_started.py ; echo
+bat getting_started/src/getting_started/getting_started.py ; echo
 ```
 
 You should have the following output:
@@ -249,7 +249,7 @@ Looking back at the configuration file, the `workflow`'s `_type` is `getting_sta
 The `register.py` file tells NAT what should automatically be imported so it is available when the toolkit is loaded.
 
 ```bash
-cat getting_started/src/getting_started/register.py ; echo
+bat getting_started/src/getting_started/register.py ; echo
 ```
 
 You should have the following output:
