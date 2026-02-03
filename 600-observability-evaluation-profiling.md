@@ -220,6 +220,8 @@ Open a second terminal to rerun the workflow
 Instead of the original workflow configuration, we will run with the updated `phoenix_config.yml` file:
 
 ```bash
+cd ~/nemo-agent-toolkit/
+source .venv/bin/activate
 nat run --config_file retail_sales_agent/configs/phoenix_config.yml \
   --input "What is the Ark S12 Ultra tablet and what are its specifications?" \
   --input "How do laptop sales compare to phone sales?" \
@@ -228,7 +230,7 @@ nat run --config_file retail_sales_agent/configs/phoenix_config.yml \
 
 ### 6.4.5 Viewing the trace
 
-You can access the Phoenix server at https://%%LABURL%%:6100
+You can access the Phoenix server at [Phoenix Server Access Link](https://%%LABURL%%:6100)
 
 You should visualize the following traces for the three tools access:
 
