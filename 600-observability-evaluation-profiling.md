@@ -426,6 +426,7 @@ The profiler runs as part of the `nat eval` command. When properly configured, i
 ```bash
 cd ~/nemo-agent-toolkit/
 nat eval --config_file retail_sales_agent/configs/config_profile.yml
+cp gantt_chart.png /var/www/html/lab/images/gantt_chart.png
 ```
 
 ### 6.6.4 Understanding Profiler Output Files
@@ -464,11 +465,11 @@ These files provide comprehensive insights into your workflow's performance and 
 
 We can also view a Gantt chart of the profile run:
 
-```bash
-from IPython.display import Image
+<a href="#" onclick="showImagePopup({ 
+src: 'lab/images/gantt_chart.png'}); return false;">
+Open Gantt Chart
+</a>
 
-Image("profile_output/gantt_chart.png")
-```
 
 ## 6.7 Lab Summary
 
