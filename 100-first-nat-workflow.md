@@ -135,7 +135,7 @@ functions:
     _type: current_datetime
   getting_started:
     _type: getting_started
-    prefix: 'Hello:'
+    prefix: 'Welcome to Ciscolive:'
 
 llms:
   azure_llm:
@@ -219,7 +219,12 @@ async def getting_started_function(config: GettingStartedFunctionConfig, builder
 
 ### 1.4.1 Function Configuration
 
-The `GettingStartedFunctionConfig` specifies `FunctionBaseConfig` as a base class. There is also a `name` specified. This name is used by the toolkit to create a static mapping when `_type` is specified anywhere where a `FunctionBaseConfig` is expected, such as `workflow` or under `functions`.
+
+Every tool starts with a configuration class. This is the class that takes information in our YAML file and makes it available to the tool.  
+
+The `GettingStartedFunctionConfig` specifies `FunctionBaseConfig` as a base class. 
+
+The `name` variable is used by the toolkit to create a static mapping when `_type` is specified anywhere where a `FunctionBaseConfig` is expected, such as `workflow` or under `functions`.
 
 ### 1.4.2 Function Registration
 
