@@ -198,7 +198,8 @@ EOF
 ### 6.4.2 Install Phoenix telemetry plugin
 
 ```bash
-uv pip install "nvidia-nat[phoenix]"
+#uv pip install "nvidia-nat[phoenix]"
+uv pip install -e packages/nvidia_nat_phoenix
 ```
 
 ### 6.4.3 Start Phoenix Server
