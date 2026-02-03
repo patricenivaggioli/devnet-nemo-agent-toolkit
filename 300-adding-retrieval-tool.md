@@ -83,7 +83,8 @@ There are several optional subpackages available for NAT. For this example, we w
 As `langchain` subpackage is already installed, let's install `llama-index`:  
 
 ```bash
-uv pip install "nvidia-nat[llama-index]"
+#uv pip install "nvidia-nat[llama-index]"
+uv pip install -e packages/nvidia_nat_llama_index
 cp ~/agent.py .venv/lib/python3.13/site-packages/nat/agent/react_agent/agent.py
 ```
 

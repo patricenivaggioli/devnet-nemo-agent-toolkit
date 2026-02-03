@@ -335,6 +335,7 @@ nat run --config_file retail_sales_agent/configs/config_multi_agent.yml \
   --input "What is the Ark S12 Ultra tablet and what are its specifications?" \
   --input "How do laptop sales compare to phone sales?" \
   --input "Plot average daily revenue"
+cp average_daily_revenue.png /var/www/html/lab/images/average_daily_revenue.png
 ```
 
 You should have the following output:
@@ -449,7 +450,7 @@ Workflow Result:
 ### 4.2.3 Display the plot result
 
 <a href="#" onclick="showImagePopup({ 
-src: 'lab/images/lab1.png'}); return false;">
+src: 'lab/images/average_daily_revenue.png'}); return false;">
 Open image
 </a>
 

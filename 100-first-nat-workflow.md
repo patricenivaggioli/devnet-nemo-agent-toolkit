@@ -75,7 +75,7 @@ A summary of the high-level components are outlined below.
 The workflow configuration file, `getting_started/configs/config.yml`, describes the operational characteristics of the entire workflow. Let's load its contents in the next cell and understand what this first workflow can do out of the box.
 
 ```bash
-bat getting_started/configs/config.yml; echo
+cat getting_started/configs/config.yml; echo
 ```
 
 You should have the following output:
@@ -159,7 +159,7 @@ EOF
 Next, let's inspect the contents of the generated workflow function:
 
 ```bash
-bat getting_started/src/getting_started/getting_started.py ; echo
+cat getting_started/src/getting_started/getting_started.py ; echo
 ```
 
 You should have the following output:
@@ -254,7 +254,7 @@ Looking back at the configuration file, the `workflow`'s `_type` is `getting_sta
 The `register.py` file tells NAT what should automatically be imported so it is available when the toolkit is loaded.
 
 ```bash
-bat getting_started/src/getting_started/register.py ; echo
+cat getting_started/src/getting_started/register.py ; echo
 ```
 
 You should have the following output:
