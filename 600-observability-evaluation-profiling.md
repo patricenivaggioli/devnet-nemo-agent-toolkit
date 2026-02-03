@@ -75,7 +75,7 @@ functions:
     embedder_name: azure_embedder
     collection_name: product_catalog_rag
     data_dir: data/rag/
-    description: "Search product catalog for TabZen tablet, AeroBook laptop, NovaPhone specifications"
+    description: "Search product catalog for Ark S12 Ultra tablet, TabZen tablet, AeroBook laptop and NovaPhone phone specifications"
 
   rag_agent:
     _type: react_agent
@@ -426,7 +426,7 @@ The profiler runs as part of the `nat eval` command. When properly configured, i
 ```bash
 cd ~/nemo-agent-toolkit/
 nat eval --config_file retail_sales_agent/configs/config_profile.yml
-cp gantt_chart.png /var/www/html/lab/images/gantt_chart.png
+cp ./profile_output/gantt_chart.png /var/www/html/lab/images/gantt_chart.png
 ```
 
 ### 6.6.4 Understanding Profiler Output Files
@@ -469,6 +469,10 @@ We can also view a Gantt chart of the profile run:
 src: 'lab/images/gantt_chart.png'}); return false;">
 Open Gantt Chart
 </a>
+
+You should have a similar chart:
+
+![alt text](./images/gantt_chart.png)
 
 
 ## 6.7 Lab Summary
