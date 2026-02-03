@@ -213,10 +213,8 @@ phoenix serve &
 
 Open a second terminal to rerun the workflow
 
-<a href="#"  onclick="showLabPanel(1,0); return false;">terminal</a>
-
 <a href="#"  onclick="showLabPanel(1,1); return false;" style="font-size:1.25em; background:#007cba; color:#fff; padding:10px 20px; border-radius:6px; text-decoration:none;">
-  Open MyApp
+  Open New Terminal
 </a>   
 
 Instead of the original workflow configuration, we will run with the updated `phoenix_config.yml` file:
@@ -231,6 +229,20 @@ nat run --config_file retail_sales_agent/configs/phoenix_config.yml \
 ### 6.4.5 Viewing the trace
 
 You can access the Phoenix server at https://%%LABURL%%:6100
+
+You should visualize the following traces for the three tools access:
+
+- Data Visualization Agent:
+
+![alt text](./images/trace_data_visualization.png)
+
+- Data Analysis Agent:
+
+![alt text](./images/trace_data_analysis.png)
+
+- RAG Agent:
+
+![alt text](./images/trace_rag.png)
 
 ## 6.5 Evaluating a Workflow
 
