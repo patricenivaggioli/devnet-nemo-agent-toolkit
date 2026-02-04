@@ -61,7 +61,7 @@ getting_started/
         └── top_level.txt
 ```
 
-The nat workflow create command generates a valid pyproject.toml file with a plugin section that points to a register.py file that has been pre-populated with NeMo Agent toolkit programming model boiler plate code (`getting_started.py`). This boiler plate code should be further customized to implement the desired custom workflow (`register.py`) and necessary NeMo Agent toolkit components. 
+The nat workflow create command generates a valid pyproject.toml file with a plugin section that points to a register.py file that has been pre-populated with NeMo Agent toolkit programming model boiler plate code (`getting_started.py`). This boiler plate code should be further customized to implement the desired custom workflow (`config.yml`) and necessary NeMo Agent toolkit components. 
 
 A summary of the high-level components are outlined below.
 
@@ -268,7 +268,7 @@ from .getting_started import getting_started_function
 
 ## 1.5 Running Your First Workflow
 
-### 1.5.1 Run with the CLI
+### 1.5.1 Run with the NAT CLI
 
 You can run a workflow by using `nat run` CLI command:
 
@@ -298,5 +298,38 @@ Number of Authentication Providers: 0
 2026-01-04 17:29:28 - INFO     - nat.front_ends.console.console_front_end_plugin:102 - --------------------------------------------------
 Workflow Result:
 ['Hello, Will! How can I assist you today?']
+--------------------------------------------------
+```
+
+### 1.5.2 Run another example/tool
+
+You can run another workflow to invoke the other `current_datetime` tool:
+
+```bash
+nat run --config_file getting_started/configs/config.yml \
+        --input "what is the date and time, please provide the time zone you are referring to ?"
+```
+
+You should have the following output with a different date and time:
+
+```console
+2026-02-04 15:17:52 - INFO     - nat.cli.commands.start:192 - Starting NAT from config file: 'getting_started/configs/config.yml'
+
+Configuration Summary:
+--------------------
+Workflow Type: react_agent
+Number of Functions: 2
+Number of Function Groups: 0
+Number of LLMs: 1
+Number of Embedders: 0
+Number of Memory: 0
+Number of Object Stores: 0
+Number of Retrievers: 0
+Number of TTC Strategies: 0
+Number of Authentication Providers: 0
+
+2026-02-04 15:17:57 - INFO     - nat.front_ends.console.console_front_end_plugin:102 - --------------------------------------------------
+Workflow Result:
+["Today's date is February 4, 2026."]
 --------------------------------------------------
 ```
