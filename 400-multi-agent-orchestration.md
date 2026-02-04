@@ -251,7 +251,7 @@ functions:
     embedder_name: azure_embedder
     collection_name: product_catalog_rag
     data_dir: data/rag/
-    description: "Search product catalog for TabZen tablet, AeroBook laptop, NovaPhone specifications"
+    description: "Search product catalog for Ark S12 Ultra tablet, TabZen tablet, AeroBook laptop, NovaPhone specifications"
 
   rag_agent:
     _type: react_agent
