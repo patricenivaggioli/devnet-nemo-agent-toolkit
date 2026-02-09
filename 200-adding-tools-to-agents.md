@@ -6,7 +6,7 @@ In this lab, we showcase how the NVIDIA NeMo Agent Toolkit (NAT) allows develope
 
 ## 2.1 Data Sources
 
-Several data files are required for this example. To keep this as a stand-alone example, the files are included here as cells which can be run to create them.
+Several data files are required for this example.  
 
 The following commands creates the `data` directory as well as a `rag` subdirectory.
 
@@ -15,7 +15,7 @@ cd ~/nemo-agent-toolkit/
 mkdir -p data/rag
 ```
 
-The following cell writes the `data/retail_sales_data.csv` file.
+The following command copy the existing `retail_sales_data.csv` in the right directory under `data/retail_sales_data.csv` file.
 
 ```bash
 cd ~/nemo-agent-toolkit/
@@ -23,7 +23,7 @@ cp ~/retail_sales_data.csv data/retail_sales_data.csv
 head -n 10 data/retail_sales_data.csv
 ```
 
-You should have the following output:
+You should have the following output which provide a hint on the first 10 lines of the file:
 
 ```yaml
 Date,StoreID,Product,UnitsSold,Revenue,Promotion
@@ -103,6 +103,33 @@ async def get_total_product_sales_data_function(config: GetTotalProductSalesData
         description=_get_total_product_sales_data.__doc__)
 EOF
 ```
+
+The main properties of the tool are:
+
+- tool name: `get_total_product_sales_data`
+- `data_path` will be specified in the workflow configuration file as `data_path: data/retail_sales_data.csv`
+- the docstring definition to allow the LLM to select the tool when it is asked to retrieve the total sales data for a specific product 
+
+```
+        """
+        Retrieve total sales data for a specific product.
+
+        Args:
+            product_name: Name of the product
+
+        Returns:
+            String message containing total sales data
+        """
+```
+
+- the dataframe operations to sum the values of the column `Revenue` and `UnitsSold` per product 
+
+```
+        revenue = df[df['Product'] == product_name]['Revenue'].sum()
+        units_sold = df[df['Product'] == product_name]['UnitsSold'].sum()
+```
+
+- finally the function returns the `Revenue` and `UnitsSold` per product and makes these data available to the LLM (`yield function`)
 
 ### 2.3.2 Sales Per Day Tool
 
@@ -268,6 +295,13 @@ workflow:
   description: "A helpful assistant that can answer questions about the retail sales CSV data"
 EOF
 ```
+
+The main properties of the workflow configuration are:
+
+- llms: we consume Azure OpenAI API and the `GPT-4o` model defined by `azure_deployment` 
+- functions: we reference the three functions defined above (`get_total_product_sales_data`, `get_sales_per_day`, `detect_outliers_iqr`) with data path configuration (`data_path: data/retail_sales_data.csv`)
+- workflow: it defines the llm and the functions available for the llm
+
 
 ## 2.6 Running the Initial Workflow
 
@@ -468,4 +502,21 @@ Workflow Result:
 ["The outliers in 'Revenue' are:\n\n1. Date: 2024-01-26, StoreID: S002, Product: Phone, UnitsSold: 24, Revenue: 12000, Promotion: Yes\n2. Date: 2024-02-15, StoreID: S001, Product: Phone, UnitsSold: 26, Revenue: 13000, Promotion: Yes"]
 --------------------------------------------------
 ```
+
+## 2.7 Lab Summary
+
+In this lab, we turned a plain NAT workflow into a tool-using agent that can answer questions about retail sales data:
+
+**Tool creation**
+- Implemented three CSV-backed tools to compute totals by product, compute sales for a specific day, and detect outliers using the IQR method.
+- Used clear docstrings and typed inputs so the LLM can choose the right tool and pass well-formed arguments.
+
+**Tool registration and configuration**
+- Registered the new tools in `retail_sales_agent/src/retail_sales_agent/register.py` so NAT can discover them at runtime.
+- Updated the workflow config to instantiate each function with the correct `data_path` and expose them via `workflow.tool_names`.
+
+**End-to-end validation**
+- Ran the workflow against multiple questions (comparison, date-based query, outliers) and confirmed the agent selected the appropriate tool each time.
+
+This tool-calling pattern is the foundation for building agents that can compute, query, and validate facts instead of relying on the LLM alone.
 

@@ -1,5 +1,7 @@
 # 5. Human In The Loop (HITL)
 
+![alt text](./images/lab5.png)
+
 ## 5.1 Adding a Custom Agent
 
 Besides using inbuilt agents in the workflows, we can also create custom agents using LangGraph or any other framework and bring them into a workflow. We demonstrate this by swapping out the ReAct agent used by the data visualization expert for a custom agent that has human-in-the-loop capability. The agent will ask the user whether they would like a summary of graph content.
@@ -62,6 +64,21 @@ async def hitl_approval_function(config: HITLApprovalFnConfig, builder: Builder)
                                description=("This function will be used to get the user's response to the prompt"))
 EOF
 ```
+
+The main properties of the tool are:
+
+- name: `hitl_approval_tool`
+- docstring to define when to involve the tool
+
+```
+   """
+    This function is used to get the user's response to the prompt.
+    It will return True if the user responds with 'yes', otherwise False.
+    """
+```
+
+- `user_input_manager` that manager is the component responsible for interacting with a human user (e.g., prompt for text input, approvals/confirmations, selecting options)
+
 
 ### 5.1.2  Register HITL Approval Tool
 ```bash
@@ -595,3 +612,21 @@ Workflow Result:
 --------------------------------------------------
 Cleaning up retail_sales_agent workflow.
 ```
+
+## 5.4 Lab Summary
+
+In this lab, we added human-in-the-loop (HITL) interaction to a multi-agent NAT workflow by swapping in a custom visualization agent.
+
+**HITL as a first-class tool**
+- Implemented an approval function (`hitl_approval_tool`) using NAT's user interaction manager to collect required user input.
+- Used the approval result to gate downstream steps, so the workflow can stop cleanly when the user declines.
+
+**Custom agent with LangGraph**
+- Replaced the ReAct visualization expert with a LangGraph-based `data_visualization_agent` that models control flow (tool execution -> approval -> optional summarization).
+- Added conditional routing between tool invocation and the approval step, with basic retry handling.
+
+**Multimodal graph summarization**
+- Added a `graph_summarizer` tool that sends the generated plot image to a vision-capable LLM for a natural language summary.
+- Demonstrated how plot artifacts can be turned into user-friendly insights when the human approves.
+
+These HITL patterns make workflows safer and more user-controlled, while still enabling automation when appropriate.

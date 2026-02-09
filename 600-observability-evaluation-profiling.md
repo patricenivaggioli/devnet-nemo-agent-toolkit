@@ -166,6 +166,9 @@ Phoenix is an open-source observability platform designed for monitoring, debugg
 
 ### 6.4.1 Updating the Workflow Configuration For Telemetry
 
+The NeMo Agent toolkit uses a flexible, plugin-based observability system that provides comprehensive support for configuring logging, tracing, and metrics for workflows.
+These features enable developers to test their workflows locally and integrate observability seamlessly with their preferred monitoring stack.
+
 We will need to update the workflow configuration file to support telemetry tracing with Phoenix.
 
 To do this, we will first copy the original configuration:
@@ -195,10 +198,27 @@ general:
 EOF
 ```
 
+The observability system is configured using the `general.telemetry` section in the workflow configuration file. This section contains two subsections: `logging` and `tracing`, and each subsection can contain multiple telemetry exporters running simultaneously.
+
+The `logging` section contains one or more logging providers. Each provider has a `_type` and optional configuration fields. The following logging providers are supported by default:
+
+- **`console`**: Writes logs to the console.
+- **`file`**: Writes logs to a file.
+
+Available log levels:
+
+- **`DEBUG`**: Detailed information for debugging.
+- **`INFO`**: General information about the workflow.
+- **`WARNING`**: Potential issues that should be addressed.
+- **`ERROR`**: Issues that affect the workflow from running correctly.
+- **`CRITICAL`**: Severe issues that prevent the workflow from continuing to run.
+
+This setup enables tracing through Phoenix at http://localhost:6006/v1/traces, with traces grouped into the `retail_sales_agent` project.
+
+
 ### 6.4.2 Install Phoenix telemetry plugin
 
 ```bash
-#uv pip install "nvidia-nat[phoenix]"
 uv pip install -e packages/nvidia_nat_phoenix
 ```
 
@@ -233,23 +253,92 @@ nat run --config_file retail_sales_agent/configs/phoenix_config.yml \
 
 You can access the Phoenix server at [Phoenix Server Access Link](https://%%LABURL%%:6100)
 
+Locate your workflow traces under your project name in projects.
+
+Inspect function execution details, latency, total tokens, request timelines and other info under `Info` and `Attributes` tab of an individual trace.
+
 You should visualize the following traces for the three tools access:
 
 - Data Visualization Agent:
 
 ![alt text](./images/trace_data_visualization.png)
 
+You can see that the NeMo Agent Toolkit instruments **both** the orchestration and the execution span:
+
+```console
+<workflow>
+ └─ data_visualization_agent        ← agent orchestration span
+     └─ data_visualization_agent    ← agent execution span
+```
+
+1. **The agent wrapper** (orchestration)
+    - lifecycle
+    - planning loop
+    - retries
+    - tool selection logic
+    
+2. **The agent “run” itself** (execution)
+    - actual reasoning iterations
+    - LLM calls
+    - tool calls
+
+The orchestration span means "I am invoking this agent as part of the workflow" and it survives even if the inner execution retries or fails, when the execution span means "This is the concrete execution of that agent" and that inner span can be repeated without breaking workflow structure.
+
+
 - Data Analysis Agent:
 
 ![alt text](./images/trace_data_analysis.png)
+
+Inside one data_analysis_agent, you see two inner blocks that look like this:
+
+```console
+total_product_sales_data
+ └─ total_product_sales_data
+```
+
+And that whole structure appears twice under the same agent.
+
+To produce that sentence "Phones have higher total revenue … compared to laptops…", the agent needs two independent facts:
+
+•	total sales for phones   
+•	total sales for laptops  
+
+Most ReAct-style agents do not batch these by default.
+Instead, they do something like:
+
+```console
+Thought: I need total sales for phones
+Action: total_product_sales_data(product="phones")
+
+Thought: I need total sales for laptops
+Action: total_product_sales_data(product="laptops")
+```
+
+The trace clearly highlights that the same tool is used but with different inputs for the two separate reasoning steps required.
 
 - RAG Agent:
 
 ![alt text](./images/trace_rag.png)
 
+
+From the above trace, note the use of gpt-35-turbo in the `product_catalog_rag` execution span. This is very important as this model is used to:   
+	•	summarize retrieved chunks.  
+	•	deduplicate overlapping content.  
+	•	compress context to fit token limits.  
+
+In other words it turns raw catalog chunks into clean, usable context.
+
+That’s why:   
+	•	it uses a cheaper model.   
+	•	token count is higher.  
+	•	it sits inside the retrieval tool.  
+
+This is a best practice RAG pattern.
+
 ## 6.5 Evaluating a Workflow
 
-After setting up observability, the next step is to evaluate your workflow's performance against a test dataset. NAT provides a powerful evaluation framework that can assess your agent's responses using various metrics and evaluators.
+Evaluation is the process of executing workflows (agents, tools, or pipelines) on curated test data and measuring their quality using quantitative metrics such as accuracy, reliability, and latency. Each of these metrics in turn is produced by an evaluator.  
+After setting up observability, the next step is to evaluate your workflow's performance against a test dataset. NAT provides a powerful evaluation framework that can assess your agent's responses using various metrics and evaluators. 
 
 For detailed information on evaluation, please refer to the [Evaluating NVIDIA NeMo Agent Toolkit Workflows](https://docs.nvidia.com/nemo/agent-toolkit/latest/workflows/evaluate.html).
 
@@ -325,6 +414,21 @@ eval:
       llm_name: azure_llm
 EOF
 ```
+
+The evaluators section of the config file specifies the evaluators to use for evaluating the workflow output. The evaluator configuration includes the evaluator type, the metric to evaluate, and any additional parameters required by the evaluator.
+We use [RAGAS](https://docs.ragas.io/), an open-source evaluation framework that enables end-to-end evaluation of LLM workflows. NeMo Agent toolkit provides an evaluation interface to interact with Ragas.  
+
+The following ragas metrics are recommended for RAG workflows:
+
+- **`AnswerAccuracy`**: Evaluates the accuracy of the answer generated by the workflow against the expected answer or ground truth.   
+- **`ContextRelevance`**: Evaluates the relevance of the context retrieved by the workflow against the question.   
+- **`ResponseGroundedness`**: Evaluates the groundedness of the response generated by the workflow based on the context retrieved by the workflow.  
+
+These metrics use a judge LLM for evaluating the generated output and retrieved context. The judge LLM is configured in the llms section of the configuration file and is referenced by the llm_name key in the evaluator configuration.
+
+- the **`trajectory`** evaluator uses the intermediate steps generated by the workflow to evaluate the workflow trajectory. 
+
+The evaluator configuration includes the evaluator type and any additional parameters required by the evaluator. A judge LLM is used to evaluate the trajectory produced by the workflow, taking into account the tools available during execution.
 
 ### 6.5.3 Running the Evaluation
 

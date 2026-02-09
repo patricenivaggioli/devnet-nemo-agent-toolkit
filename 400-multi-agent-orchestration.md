@@ -175,19 +175,19 @@ In this multi-agent orchestration system, we divide responsibilities among speci
 
 **1. Data Analysis Agent**.  
 - **Tools:** `total_product_sales_data`, `sales_per_day`, `detect_outliers`.  
-- **Justification:** This agent handles raw data processing and statistical analysis. These tools extract, aggregate, and analyze sales data, making it the expert for answering questions about sales trends, patterns, and anomalies. By isolating data analysis tasks, we ensure consistent and reliable data interpretation.
+- **Purpose:** This agent handles raw data processing and statistical analysis. These tools extract, aggregate, and analyze sales data, making it the expert for answering questions about sales trends, patterns, and anomalies. By isolating data analysis tasks, we ensure consistent and reliable data interpretation.
 
 **2. Visualization Agent**.  
 - **Tools:** `plot_total_product_sales`, `plot_sales_per_day`, `plot_average_daily_revenue`.  
-- **Justification:** This agent specializes in creating visual representations of data. Visualization requires different expertise than raw data analysis—it involves understanding chart types, formatting, and visual communication. Separating this from data analysis allows the agent to focus on producing clear, effective visualizations without mixing concerns.
+- **Purpose:** This agent specializes in creating visual representations of data. Visualization requires different expertise than raw data analysis—it involves understanding chart types, formatting, and visual communication. Separating this from data analysis allows the agent to focus on producing clear, effective visualizations without mixing concerns.
 
 **3. Knowledge Retrieval Agent (RAG)**.  
 - **Tools:** `llama_index_rag_tool`.  
-- **Justification:** This agent accesses external knowledge bases and documentation through retrieval-augmented generation. It handles questions that require contextual information beyond the sales data itself, such as business policies, product information, or historical context. This separation ensures that knowledge retrieval doesn't interfere with computational tasks.
+- **Purpose:** This agent accesses external knowledge bases and documentation through retrieval-augmented generation. It handles questions that require contextual information beyond the sales data itself, such as business policies, product information, or historical context. This separation ensures that knowledge retrieval doesn't interfere with computational tasks.
 
 **4. Orchestrator Agent (Top-Level)**.  
 - **Tools:** None (delegates to sub-agents).  
-- **Justification:** The orchestrator doesn't perform tasks directly but instead routes requests to the appropriate expert agent. This design pattern mirrors real-world organizational structures where a manager delegates to specialists. It enables complex workflows where multiple agents collaborate, each contributing their expertise to solve multi-faceted problems.  
+- **Purpose:** The orchestrator doesn't perform tasks directly but instead routes requests to the appropriate expert agent. This design pattern mirrors real-world organizational structures where a manager delegates to specialists. It enables complex workflows where multiple agents collaborate, each contributing their expertise to solve multi-faceted problems.  
 
 This architecture provides several benefits:
 
@@ -453,4 +453,22 @@ Workflow Result:
 src: 'lab/images/average_daily_revenue.png'}); return false;">
 Open image
 </a>
+
+
+## 4.3 Lab Summary
+
+In this lab, we built a simple mixture-of-agents retail sales assistant using NeMo Agent Toolkit:
+
+**Multi-agent orchestration**
+- Defined a top-level supervisor (workflow agent) that routes requests to specialist sub-agents.
+- Kept responsibilities separated across analysis, retrieval (RAG), and visualization to reduce tool sprawl and improve reliability.
+
+**Specialist agents and tooling**
+- Configured a **data analysis agent** with CSV-focused tools for aggregation, per-day breakdowns, and outlier detection.
+- Configured a **RAG agent** backed by `llama_index_rag` to answer product catalog questions grounded in retrieved context.
+- Built and registered **custom visualization tools** (matplotlib) and exposed them through a dedicated **data visualization agent**.
+
+**End-to-end execution**
+- Ran the multi-agent workflow with mixed inputs (product Q&A, sales comparison, and plotting) and validated that each request was delegated to the correct expert agent.
+- Generated a plot artifact (`average_daily_revenue.png`) as an example of how tool outputs can produce user-consumable results.
 

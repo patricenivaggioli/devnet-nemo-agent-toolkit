@@ -83,14 +83,13 @@ There are several optional subpackages available for NAT. For this example, we w
 As `langchain` subpackage is already installed, let's install `llama-index`:  
 
 ```bash
-#uv pip install "nvidia-nat[llama-index]"
 uv pip install -e packages/nvidia_nat_llama_index
 cp ~/agent.py .venv/lib/python3.13/site-packages/nat/agent/react_agent/agent.py
 ```
 
 ## 3.3 Defining the Retrieval Tool
 
-Just like with section 2 above, we will define our new tool by writing to a new source file for this agent: `llama_index_rag_tool.py`. This tool using Llama Index to chunk, embed, index, and retrieve ranked results from the source text when called.
+Just like with lab 2 above, we will define our new tool by writing to a new source file for this agent: `llama_index_rag_tool.py`. This tool using Llama Index to chunk, embed, index, and retrieve ranked results from the source text when called.
 
 **Note**: _In a real‑world scenario, it is not recommended to upsert records at query time due to latency. However, the simplistic approach below is adequate for this demo._
 
@@ -174,6 +173,26 @@ async def llama_index_rag_tool(config: LlamaIndexRAGConfig, builder: Builder):
     yield FunctionInfo.from_fn(_arun, description=config.description)
 EOF
 ```
+
+The main properties of the tool are:
+
+- tool name: `llama_index_rag`
+- `data_path` reference the documentation directory, it will be specified in the workflow configuration file as `data/rag/`
+- `llm_name`: define the LLM to be used by the RAG tool
+- `embedder_name`: define the Embedding model to be used by the RAG tool
+- the docstring definition to allow the LLM to select the tool when it is asked to search product catalog for information about tablets, laptops, and smartphones
+
+```
+        """
+        Search product catalog for information about tablets, laptops, and smartphones
+        Args:
+            inputs: user query about product specifications
+        """
+```
+
+-  the function defines a `chunk_size=400` and a `chunk_overlap=20` as well as an internal `VectorStore`
+
+- finally the function returns the information about the product and makes that response available to the LLM (`yield function`)
 
 Then we will register it...
 
@@ -314,4 +333,19 @@ Workflow Result:
 --------------------------------------------------
 ```
 
-**Note** _the significance of what we've achieved in just a few lines of code: a reasoning agent was brought up with tool calls that allow it the execute predefined python functions to achieve what an LLM alone cannot. Additionally, we've incorporated context retrieval RAG into the same workflow so that the agent can access domain-specific or real time data sources that it's backbone LLM has never seen during training._
+## 3.6 Lab Summary
+
+In this lab, we extended the retail sales assistant with retrieval-augmented generation (RAG) using a custom LlamaIndex tool:
+
+**Knowledge base and indexing**
+- Created a simple product catalog knowledge base under `data/rag/` to represent domain content the base model may not know.
+- Used LlamaIndex to load documents, split them into chunks, embed them, and build an in-memory vector index for similarity search.
+
+**Retrieval tool integration**
+- Implemented and registered a `llama_index_rag` tool that queries the vector index and returns grounded answers from retrieved chunks.
+- Added the tool to a NAT workflow config so the agent can choose retrieval when the user asks product-specification questions.
+
+**End-to-end validation**
+- Ran the workflow against a product question and confirmed the agent routed to the retrieval tool and produced a catalog-grounded response.
+
+This pattern lets you safely extend an agent with domain-specific knowledge without retraining the LLM.

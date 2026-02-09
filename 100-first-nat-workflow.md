@@ -333,3 +333,20 @@ Workflow Result:
 ["Today's date is February 4, 2026."]
 --------------------------------------------------
 ```
+
+## 1.6 Lab Summary
+
+In this lab, you created and ran your first NeMo Agent Toolkit (NAT) workflow end-to-end:
+
+**Install and bootstrap**
+- Installed NAT into a virtual environment and used `nat workflow create` to scaffold a working project.
+- Explored the generated workflow structure (configs, source, registration) to understand how NAT packages workflows.
+
+**YAML-first configuration**
+- Reviewed `getting_started/configs/config.yml` to see how LLMs, functions (tools), and the workflow entrypoint are composed.
+- Learned how a built-in ReAct agent uses the configured LLM to decide when to call tools like `current_datetime` and your custom function.
+
+**Run and validate**
+- Executed the workflow with `nat run` and confirmed the agent produced answers by selecting the appropriate tool based on user intent.
+
+This lab establishes the baseline NAT workflow pattern you’ll reuse in later labs: define tools, register them, wire them into YAML, and iterate by running the workflow.
