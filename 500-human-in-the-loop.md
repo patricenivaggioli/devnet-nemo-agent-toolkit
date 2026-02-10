@@ -615,18 +615,18 @@ Cleaning up retail_sales_agent workflow.
 
 ## 5.4 Lab Summary
 
-In this lab, we added human-in-the-loop (HITL) interaction to a multi-agent NAT workflow by swapping in a custom visualization agent.
+In this lab, we added human-in-the-loop (HITL) interaction to a multi-agent NAT workflow by swapping in a custom visualization agent.   
 
-**HITL as a first-class tool**
-- Implemented an approval function (`hitl_approval_tool`) using NAT's user interaction manager to collect required user input.
-- Used the approval result to gate downstream steps, so the workflow can stop cleanly when the user declines.
+**HITL as a first-class tool**.  
+- Implemented an approval function (`hitl_approval_tool`) using NAT's user interaction manager to collect required user input.   
+- Used the approval result to gate downstream steps, so the workflow can stop cleanly when the user declines.   
 
-**Custom agent with LangGraph**
-- Replaced the ReAct visualization expert with a LangGraph-based `data_visualization_agent` that models control flow (tool execution -> approval -> optional summarization).
-- Added conditional routing between tool invocation and the approval step, with basic retry handling.
+**Custom agent with LangGraph**.  
+- Replaced the ReAct visualization expert with a LangGraph-based `data_visualization_agent` that models control flow (tool execution -> approval -> optional summarization).   
+- Added conditional routing between tool invocation and the approval step, with basic retry handling.   
 
-**Multimodal graph summarization**
-- Added a `graph_summarizer` tool that sends the generated plot image to a vision-capable LLM for a natural language summary.
-- Demonstrated how plot artifacts can be turned into user-friendly insights when the human approves.
+**Multimodal graph summarization**.  
+- Added a `graph_summarizer` tool that sends the generated plot image to a vision-capable LLM for a natural language summary.   
+- Demonstrated how plot artifacts can be turned into user-friendly insights when the human approves.   
 
-These HITL patterns make workflows safer and more user-controlled, while still enabling automation when appropriate.
+These HITL patterns make workflows safer and more user-controlled, while still enabling automation when appropriate.   

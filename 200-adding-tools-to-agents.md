@@ -507,16 +507,17 @@ Workflow Result:
 
 In this lab, we turned a plain NAT workflow into a tool-using agent that can answer questions about retail sales data:
 
-**Tool creation**
-- Implemented three CSV-backed tools to compute totals by product, compute sales for a specific day, and detect outliers using the IQR method.
-- Used clear docstrings and typed inputs so the LLM can choose the right tool and pass well-formed arguments.
+**Tool creation**.  
+- Implemented three CSV-backed tools to compute totals by product, compute sales for a specific day, and detect outliers using the IQR method.   
+- Used clear docstrings and typed inputs so the LLM can choose the right tool and pass well-formed arguments.   
 
-**Tool registration and configuration**
-- Registered the new tools in `retail_sales_agent/src/retail_sales_agent/register.py` so NAT can discover them at runtime.
-- Updated the workflow config to instantiate each function with the correct `data_path` and expose them via `workflow.tool_names`.
+**Tool registration and configuration**.  
+- Registered the new tools in `retail_sales_agent/src/retail_sales_agent/register.py` so NAT can discover them at runtime.   
+- Updated the workflow config to instantiate each function with the correct `data_path` and expose them via `workflow.tool_names`.   
 
-**End-to-end validation**
-- Ran the workflow against multiple questions (comparison, date-based query, outliers) and confirmed the agent selected the appropriate tool each time.
+**End-to-end validation**.  
+- Ran the workflow against multiple questions (comparison, date-based query, outliers) and confirmed the agent selected the appropriate tool each time.   
 
-This tool-calling pattern is the foundation for building agents that can compute, query, and validate facts instead of relying on the LLM alone.
+This tool-calling pattern is the foundation for building agents that can compute, query, and validate facts instead of relying on the LLM alone.   
+
 

@@ -335,17 +335,17 @@ Workflow Result:
 
 ## 3.6 Lab Summary
 
-In this lab, we extended the retail sales assistant with retrieval-augmented generation (RAG) using a custom LlamaIndex tool:
+In this lab, we extended the retail sales assistant with retrieval-augmented generation (RAG) using a custom LlamaIndex tool:   
 
-**Knowledge base and indexing**
-- Created a simple product catalog knowledge base under `data/rag/` to represent domain content the base model may not know.
-- Used LlamaIndex to load documents, split them into chunks, embed them, and build an in-memory vector index for similarity search.
+**Knowledge base and indexing**.  
+- Created a simple product catalog knowledge base under `data/rag/` to represent domain content the base model may not know.    
+- Used LlamaIndex to load documents, split them into chunks, embed them, and build an in-memory vector index for similarity search.   
 
-**Retrieval tool integration**
-- Implemented and registered a `llama_index_rag` tool that queries the vector index and returns grounded answers from retrieved chunks.
-- Added the tool to a NAT workflow config so the agent can choose retrieval when the user asks product-specification questions.
+**Retrieval tool integration**.  
+- Implemented and registered a `llama_index_rag` tool that queries the vector index and returns grounded answers from retrieved chunks.   
+- Added the tool to a NAT workflow config so the agent can choose retrieval when the user asks product-specification questions.   
 
-**End-to-end validation**
-- Ran the workflow against a product question and confirmed the agent routed to the retrieval tool and produced a catalog-grounded response.
+**End-to-end validation**.   
+- Ran the workflow against a product question and confirmed the agent routed to the retrieval tool and produced a catalog-grounded response.   
 
-This pattern lets you safely extend an agent with domain-specific knowledge without retraining the LLM.
+This pattern lets you safely extend an agent with domain-specific knowledge without retraining the LLM.   

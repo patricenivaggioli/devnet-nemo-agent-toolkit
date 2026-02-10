@@ -457,18 +457,18 @@ Open image
 
 ## 4.3 Lab Summary
 
-In this lab, we built a simple mixture-of-agents retail sales assistant using NeMo Agent Toolkit:
+In this lab, we built a simple mixture-of-agents retail sales assistant using NeMo Agent Toolkit:   
 
-**Multi-agent orchestration**
-- Defined a top-level supervisor (workflow agent) that routes requests to specialist sub-agents.
-- Kept responsibilities separated across analysis, retrieval (RAG), and visualization to reduce tool sprawl and improve reliability.
+**Multi-agent orchestration**   
+- Defined a top-level supervisor (workflow agent) that routes requests to specialist sub-agents.   
+- Kept responsibilities separated across analysis, retrieval (RAG), and visualization to reduce tool sprawl and improve reliability.   
 
-**Specialist agents and tooling**
-- Configured a **data analysis agent** with CSV-focused tools for aggregation, per-day breakdowns, and outlier detection.
-- Configured a **RAG agent** backed by `llama_index_rag` to answer product catalog questions grounded in retrieved context.
-- Built and registered **custom visualization tools** (matplotlib) and exposed them through a dedicated **data visualization agent**.
+**Specialist agents and tooling**.  
+- Configured a **data analysis agent** with CSV-focused tools for aggregation, per-day breakdowns, and outlier detection.   
+- Configured a **RAG agent** backed by `llama_index_rag` to answer product catalog questions grounded in retrieved context.    
+- Built and registered **custom visualization tools** (matplotlib) and exposed them through a dedicated **data visualization agent**.    
 
-**End-to-end execution**
-- Ran the multi-agent workflow with mixed inputs (product Q&A, sales comparison, and plotting) and validated that each request was delegated to the correct expert agent.
-- Generated a plot artifact (`average_daily_revenue.png`) as an example of how tool outputs can produce user-consumable results.
+**End-to-end execution**.  
+- Ran the multi-agent workflow with mixed inputs (product Q&A, sales comparison, and plotting) and validated that each request was delegated to the correct expert agent.   
+- Generated a plot artifact (`average_daily_revenue.png`) as an example of how tool outputs can produce user-consumable results.   
 
