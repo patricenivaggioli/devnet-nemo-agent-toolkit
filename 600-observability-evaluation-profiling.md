@@ -644,47 +644,49 @@ You should have the following output:
 
 By cleaning the `reasoning` text result we have:
 
-i. Is the final answer helpful?   
+**i. Is the final answer helpful?**   
 The final answer is helpful. It provides a clear comparison between laptop and phone sales, including both revenue and units sold. The information is relevant and directly addresses the user’s question.  
 
 Score for this criterion: 5  
 
 ⸻  
 
-ii. Does the AI language use a logical sequence of tools to answer the question?   
+**ii. Does the AI language use a logical sequence of tools to answer the question?**   
 The AI uses a logical sequence of tools to retrieve and analyze the sales data for laptops and phones. It first queries the sales data for laptops and phones separately, then compares the results and provides the final answer. The sequence is logical and follows a clear progression.   
 
 Score for this criterion: 5   
 
 ⸻
 
-iii. Does the AI language model use the tools in a helpful way?   
+**iii. Does the AI language model use the tools in a helpful way?**   
 The tools are used effectively to retrieve the necessary data. The AI correctly queries the sales data for laptops and phones and uses the information to generate a meaningful comparison. However, there is some redundancy in the tool usage (e.g., Step 6 repeats the comparison already made in Step 5). While this does not detract from the accuracy of the answer, it indicates inefficiency.   
 
 Score for this criterion: 4  
 
 ⸻
 
-iv. Does the AI language model use too many steps to answer the question?     
+**iv. Does the AI language model use too many steps to answer the question?**     
 The AI uses seven steps to answer the question, which is excessive. Steps 5, 6, and 7 essentially repeat the same information, and Step 6 (data_analysis_agent) is redundant because the comparison was already made in Step 5. The AI could have streamlined the process by eliminating unnecessary steps.   
 
 Score for this criterion: 3     
 
 ⸻
 
-v. Are the appropriate tools used to answer the question?   
+**v. Are the appropriate tools used to answer the question?**   
 The appropriate tools are used to answer the question. The AI correctly uses the total_product_sales_data tool to retrieve sales data for laptops and phones and uses the analysis tools to compare the results. However, the repeated use of tools in Steps 5, 6, and 7 suggests inefficiency in tool selection and usage.   
 
 Score for this criterion: 4   
 
 ⸻
 
-Final Score Summary
+**Final Score Summary**
 	•	i. Is the final answer helpful?: 5   
 	•	ii. Does the AI language use a logical sequence of tools to answer the question?: 5   
 	•	iii. Does the AI language model use the tools in a helpful way?: 4   
 	•	iv. Does the AI language model use too many steps to answer the question?: 3   
 	•	v. Are the appropriate tools used to answer the question?: 4    
+
+
 
 
 ## 6.6 Profiling a Workflow
