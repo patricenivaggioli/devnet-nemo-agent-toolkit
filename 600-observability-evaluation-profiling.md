@@ -549,7 +549,9 @@ You should have a similar output:
 
 Let's check the results for the **`ContextRelevance`**
 
+```bash
 cat eval_output/relevance_output.json | jq '{average_score, eval_output_items: [.eval_output_items[1]]}'
+```
 
 You should have a similar output:
 
